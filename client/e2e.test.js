@@ -22,5 +22,12 @@ describe("App.js", () => {
     expect(textName).toContain(enteredName);
   });
 
+  it("display customers on page load", async () => {
+    // open application in browser
+    await page.goto("http://localhost:3000");
 
+    await page.waitForSelector("li");
+    const textName = await page.$eval("li", (e) => e.textContent);
+    expect(textName).toContain("Haroon Ali");
+  });
 });
