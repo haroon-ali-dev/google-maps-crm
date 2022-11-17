@@ -46,7 +46,7 @@ const CreateCustomer = ({ createCustomer }) => {
           </label>
         </div>
         <div>
-          <input type="submit" value="Add" />
+          <button id="btn-add" type="submit">Add</button>
         </div>
       </form>
     </div>
