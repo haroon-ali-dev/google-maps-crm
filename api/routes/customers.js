@@ -12,6 +12,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const customer = await Customer.findOne({ _id: req.params.id });
+
+    res.json({ message: "success", customer });
+  } catch (error) {
+    if (error) return res.status(500).json({ message: error.message });
+  }
+});
+
 router.post("/", async (req, res) => {
   // console.log(req.body);
   const { error } = validate(req.body);
