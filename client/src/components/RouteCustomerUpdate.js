@@ -66,7 +66,7 @@ const RouteCustomerUpdate = () => {
           </label>
         </div>
         <div>
-          <button id="btn-add" type="submit">Update</button>
+          <button id="btn-update" type="submit">Update</button>
         </div>
       </form>
     </div>

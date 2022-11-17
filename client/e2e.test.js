@@ -41,4 +41,28 @@ describe("App.js", () => {
 
     expect(textName).toContain(enteredName);
   });
+
+  it("update customer name and email", async () => {
+    await page.click(".btn-edit");
+    await page.waitForSelector("#name");
+
+    await page.evaluate(() => document.querySelector("#name").value = "")
+    await page.click("#name");
+    await page.type("#name", "Samantha Smith");
+    await page.evaluate(() => document.querySelector("#email").value = "")
+    await page.click("#email");
+    await page.type("#email", "gullible.jin@gmail.com");
+
+    enteredName = await page.$eval(
+      "#name",
+      (e) => e.value
+    );
+
+    await page.click("#btn-update");
+
+    await page.waitForSelector(".cus-name");
+    const textName = await page.$eval(".cus-name", (e) => e.textContent);
+
+    expect(textName).toContain(enteredName);
+  });
 });
