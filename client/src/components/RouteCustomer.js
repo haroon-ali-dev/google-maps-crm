@@ -24,8 +24,8 @@ const RouteCustomer = () => {
 
   return (
     <div>
-      <p>Name: {name}</p>
-      <p>Email: {email}</p>
+      <p className="cus-name">Name: {name}</p>
+      <p className="cus-email">Email: {email}</p>
     </div>
   );
 }

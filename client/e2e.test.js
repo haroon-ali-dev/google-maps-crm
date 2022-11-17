@@ -1,3 +1,5 @@
+let enteredName;
+
 describe("App.js", () => {
   it("creates and displays customer", async () => {
     // open application in browser
@@ -9,7 +11,7 @@ describe("App.js", () => {
     await page.click("#email");
     await page.type("#email", "haroon.ali.1104@gmail.com");
 
-    const enteredName = await page.$eval(
+    enteredName = await page.$eval(
       "#name",
       (e) => e.value
     );
@@ -28,6 +30,15 @@ describe("App.js", () => {
 
     await page.waitForSelector("li");
     const textName = await page.$eval("li", (e) => e.textContent);
-    expect(textName).toContain("Haroon Ali");
+    expect(textName).toContain(enteredName);
+  });
+
+  it("display customer information when view button is clicked", async () => {
+    await page.click(".btn-view");
+
+    await page.waitForSelector(".cus-name");
+    const textName = await page.$eval(".cus-name", (e) => e.textContent);
+
+    expect(textName).toContain(enteredName);
   });
 });

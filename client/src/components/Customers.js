@@ -6,8 +6,9 @@ const Customers = ({ customers }) => {
       <ul>
         {customers.map((customer, i) => (
           <li key={i}>
-            {customer.name} {customer.email}
-            <Link to={`customer/${customer._id}`}>View</Link>
+            <p className="cus-name">{customer.name}</p>
+            <p className="cus-email">{customer.email}</p>
+            <Link to={`customer/${customer._id}`} className="btn-view">View</Link>
           </li>
         ))}
       </ul>
