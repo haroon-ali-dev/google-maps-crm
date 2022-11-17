@@ -21,4 +21,6 @@ describe("App.js", () => {
     const textName = await page.$eval("li", (e) => e.textContent);
     expect(textName).toContain(enteredName);
   });
+
+
 });

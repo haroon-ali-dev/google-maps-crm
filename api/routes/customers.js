@@ -2,6 +2,16 @@ const express = require("express");
 const router = express.Router();
 const { Customer, validate } = require("../model/customer");
 
+router.get("/", async (req, res) => {
+  try {
+    const customers = await Customer.find();
+
+    res.json({ message: "success", customers });
+  } catch (error) {
+    if (error) return res.status(500).json({ message: error.message });
+  }
+});
+
 router.post("/", async (req, res) => {
   // console.log(req.body);
   const { error } = validate(req.body);
