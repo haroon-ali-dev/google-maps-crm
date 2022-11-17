@@ -37,4 +37,20 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).json({ message: error.message });
+
+  try {
+    await Customer.findByIdAndUpdate(req.params.id, {
+      name: req.body.name,
+      email: req.body.email
+    });
+
+    res.json({ message: "success" });
+  } catch (error) {
+    if (error) return res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

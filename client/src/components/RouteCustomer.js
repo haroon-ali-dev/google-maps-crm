@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const RouteCustomer = () => {
   const { cId } = useParams();
@@ -26,6 +26,7 @@ const RouteCustomer = () => {
     <div>
       <p className="cus-name">Name: {name}</p>
       <p className="cus-email">Email: {email}</p>
+      <Link to={`/customer-update/${cId}`} className="btn-edit">Edit</Link>
     </div>
   );
 }
