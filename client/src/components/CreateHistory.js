@@ -1,7 +1,8 @@
 import { useState } from "react";
+import moment from "moment";
 
 const CreateHistory = ({ cId, createHistory }) => {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("2022-05-05");
   const [info, setInfo] = useState("");
 
   const submit = async (e) => {
@@ -36,7 +37,7 @@ const CreateHistory = ({ cId, createHistory }) => {
         <div>
           <label>
             Date
-            <input id="name" type="date" value={date} onChange={(e) => { setDate(e.target.value); }} required />
+            <input id="date" type="date" value={date} onChange={(e) => { setDate(moment(e.target.value).format('YYYY-MM-DD')); }} required />
           </label>
         </div>
         <div>

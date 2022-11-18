@@ -1,4 +1,4 @@
-let enteredName;
+let enteredText;
 
 describe("App.js", () => {
   it("creates and displays customer", async () => {
@@ -11,7 +11,7 @@ describe("App.js", () => {
     await page.click("#email");
     await page.type("#email", "haroon.ali.1104@gmail.com");
 
-    enteredName = await page.$eval(
+    enteredText = await page.$eval(
       "#name",
       (e) => e.value
     );
@@ -21,7 +21,7 @@ describe("App.js", () => {
     //check result
     await page.waitForSelector("li");
     const textName = await page.$eval("li", (e) => e.textContent);
-    expect(textName).toContain(enteredName);
+    expect(textName).toContain(enteredText);
   });
 
   it("display customers on page load", async () => {
@@ -30,7 +30,7 @@ describe("App.js", () => {
 
     await page.waitForSelector("li");
     const textName = await page.$eval("li", (e) => e.textContent);
-    expect(textName).toContain(enteredName);
+    expect(textName).toContain(enteredText);
   });
 
   it("display customer information when view button is clicked", async () => {
@@ -39,7 +39,7 @@ describe("App.js", () => {
     await page.waitForSelector(".cus-name");
     const textName = await page.$eval(".cus-name", (e) => e.textContent);
 
-    expect(textName).toContain(enteredName);
+    expect(textName).toContain(enteredText);
   });
 
   it("update customer name and email", async () => {
@@ -53,7 +53,7 @@ describe("App.js", () => {
     await page.click("#email");
     await page.type("#email", "gullible.jin@gmail.com");
 
-    enteredName = await page.$eval(
+    enteredText = await page.$eval(
       "#name",
       (e) => e.value
     );
@@ -63,6 +63,29 @@ describe("App.js", () => {
     await page.waitForSelector(".cus-name");
     const textName = await page.$eval(".cus-name", (e) => e.textContent);
 
-    expect(textName).toContain(enteredName);
+    expect(textName).toContain(enteredText);
+  });
+
+  it("creates and displays history", async () => {
+    enteredText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+    await page.click("#info");
+    await page.type("#info", enteredText);
+
+    await page.click("#btn-add");
+
+    await page.waitForSelector(".history-info");
+    const text = await page.$eval(".history-info", (e) => e.textContent);
+
+    expect(text).toContain(enteredText);
+  });
+
+  it("displays histories on page load", async () => {
+    await page.reload();
+
+    await page.waitForSelector(".history-info");
+    const text = await page.$eval(".history-info", (e) => e.textContent);
+
+    expect(text).toContain(enteredText);
   });
 });
