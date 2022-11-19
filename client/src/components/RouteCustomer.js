@@ -26,7 +26,7 @@ const RouteCustomer = () => {
     getCustomerInfo();
 
     const getHistories = async () => {
-      const res = await fetch(`http://localhost:3001/api/histories/${cId}`);
+      const res = await fetch(`http://localhost:3001/api/histories/customer/${cId}`);
 
       const data = await res.json();
       if (data.message === "success") {

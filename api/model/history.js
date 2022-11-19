@@ -20,7 +20,7 @@ const historySchema = new mongoose.Schema({
 
 const History = mongoose.model("History", historySchema);
 
-function validate(customer) {
+function validateCreate(customer) {
   const schema = Joi.object({
     customerId: Joi.string().required(),
     date: Joi.date().required(),
@@ -30,5 +30,15 @@ function validate(customer) {
   return schema.validate(customer);
 }
 
+function validateUpdate(customer) {
+  const schema = Joi.object({
+    date: Joi.date().required(),
+    info: Joi.string().min(3).max(500).required()
+  });
+
+  return schema.validate(customer);
+}
+
 module.exports.History = History;
-module.exports.validate = validate;
+module.exports.validateCreate = validateCreate;
+module.exports.validateUpdate = validateUpdate;
