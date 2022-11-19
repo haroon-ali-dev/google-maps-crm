@@ -43,7 +43,7 @@ describe("App.js", () => {
   });
 
   it("update customer name and email", async () => {
-    await page.click(".btn-edit");
+    await page.click(".btn-update");
     await page.waitForSelector("#name");
 
     await page.evaluate(() => document.querySelector("#name").value = "")
@@ -82,6 +82,27 @@ describe("App.js", () => {
 
   it("displays histories on page load", async () => {
     await page.reload();
+
+    await page.waitForSelector(".history-info");
+    const text = await page.$eval(".history-info", (e) => e.textContent);
+
+    expect(text).toContain(enteredText);
+  });
+
+  it("updates history", async () => {
+    await page.click(".update-history");
+    await page.waitForSelector("#info");
+
+    await page.evaluate(() => document.querySelector("#info").value = "")
+    await page.click("#info");
+    await page.type("#info", "Hello World.");
+
+    enteredText = await page.$eval(
+      "#info",
+      (e) => e.value
+    );
+
+    await page.click("#btn-update");
 
     await page.waitForSelector(".history-info");
     const text = await page.$eval(".history-info", (e) => e.textContent);

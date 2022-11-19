@@ -47,7 +47,7 @@ const RouteCustomer = () => {
     <div>
       <p className="cus-name">Name: {name}</p>
       <p className="cus-email">Email: {email}</p>
-      <Link to={`/customer-update/${cId}`} className="btn-edit">Edit</Link>
+      <Link to={`/customer-update/${cId}`} className="btn-update">Edit</Link>
 
       <CreateHistory cId={cId} createHistory={createHistory} />
       <Histories histories={histories} />
