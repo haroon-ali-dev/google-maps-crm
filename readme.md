@@ -8,7 +8,7 @@
 
 ### Setup back-end
 
-In api/ run:
+In /api/ run:
 
 ```bash
 npm i
@@ -20,7 +20,7 @@ Then run a mongodb server (with no username/password) at:
 "mongodb://localhost:27017/crm"
 ```
 
-Then in api/ start node server:
+Then in /api/ start node server:
 
 ```bash
 node index.js
@@ -28,7 +28,7 @@ node index.js
 
 ### Setup front-end
 
-In client/ run:
+In /client/ run:
 
 ```bash
 npm i
@@ -42,7 +42,7 @@ npm start
 
 ## How To Run E2E Tests
 
-In client/ run:
+In /client/ run:
 
 ```bash
 npm run test:e2e
