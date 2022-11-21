@@ -1,3 +1,8 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +10,123 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: #2B2B2B;
+  color: white;
+  font-family: 'Raleway', sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 
     monospace;
+}
+
+.heading {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.cont {
+  background-color: #3B3B3B;
+  width: 50%;
+  border-radius: 20px;
+  margin: 100px auto 100px auto;
+  padding: 50px;
+}
+
+form {
+  width: 70%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 20px;
+}
+
+.form-input-container {
+  display: inline;
+}
+
+input {
+  margin-top: 10px;
+  font-size: 20px;
+  border-radius: 20px;
+  height: 40px;
+  padding-left: 20px;
+  border: none;
+}
+
+label {
+  margin-left: 10px;
+}
+
+.btn {
+  border-radius: 20px;
+  font-size: 15px;
+  border: none;
+  padding: 10px 30px 10px 30px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-add {
+  margin-top: 20px;
+  background-color: #E2412E;
+  color: white;
+}
+
+.btn-view {
+  background-color: white;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  width: 100px;
+}
+
+ul {
+  list-style-type: none;
+  font-size: 20px;
+  width: 50%;
+  margin: 30px auto 0px auto;
+}
+
+li {
+  background-color: #009379;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+li > p {
+  margin-bottom: 20px;
+}
+
+.cus-name, .cus-email {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.form-create-history {
+  margin-top: 30px;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
+}
+
+input[type="date"] {
+  padding-right: 20px;
+}
+
+.sub-heading {
+  text-align: center;
+  margin-top: 50px;
+}
+
+textarea {
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 10px;
 }

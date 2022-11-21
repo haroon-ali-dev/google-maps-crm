@@ -33,20 +33,22 @@ const CreateCustomer = ({ createCustomer }) => {
   return (
     <div>
       <form onSubmit={submit}>
-        <div>
+        <div className="form-input-container">
           <label>
             Name
+            <br />
             <input id="name" type="text" value={name} onChange={(e) => { setName(e.target.value); }} required />
           </label>
         </div>
-        <div>
+        <div className="form-input-container">
           <label>
             Email
+            <br />
             <input id="email" type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} required />
           </label>
         </div>
-        <div>
-          <button id="btn-add" type="submit">Add</button>
+        <div className="form-submit-container">
+          <button className="btn btn-add" id="btn-add" type="submit">Add</button>
         </div>
       </form>
     </div>

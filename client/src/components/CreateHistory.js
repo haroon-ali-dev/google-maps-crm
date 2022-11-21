@@ -33,21 +33,23 @@ const CreateHistory = ({ cId, createHistory }) => {
 
   return (
     <div>
-      <form onSubmit={submit}>
+      <form className="form-create-history" onSubmit={submit}>
         <div>
           <label>
             Date
+            <br />
             <input id="date" type="date" value={date} onChange={(e) => { setDate(moment(e.target.value).format('YYYY-MM-DD')); }} required />
           </label>
         </div>
         <div>
           <label>
             Info
-            <textarea id="info" value={info} onChange={(e) => { setInfo(e.target.value); }} required></textarea>
+            <br />
+            <textarea id="info" cols="30" rows="10" value={info} onChange={(e) => { setInfo(e.target.value); }} required></textarea>
           </label>
         </div>
         <div>
-          <button id="btn-add" type="submit">Add</button>
+          <button className="btn btn-add" id="btn-add" type="submit" style={{ marginTop: "0px" }}>Add</button>
         </div>
       </form>
     </div>

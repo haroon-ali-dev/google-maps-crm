@@ -52,22 +52,24 @@ const RouteHistoryUpdate = () => {
   }
 
   return (
-    <div>
+    <div className="cont">
       <form onSubmit={submit}>
         <div>
           <label>
             Date
+            <br />
             <input id="date" type="date" value={date} onChange={(e) => { setDate(moment(e.target.value).format('YYYY-MM-DD')); }} required />
           </label>
         </div>
         <div>
           <label>
             Info
-            <textarea id="info" value={info} onChange={(e) => { setInfo(e.target.value); }} required></textarea>
+            <br />
+            <textarea id="info" cols="30" rows="10" value={info} onChange={(e) => { setInfo(e.target.value); }} required></textarea>
           </label>
         </div>
         <div>
-          <button id="btn-update" type="submit">Update</button>
+          <button className="btn btn-add" id="btn-update" type="submit">Update</button>
         </div>
       </form>
     </div>

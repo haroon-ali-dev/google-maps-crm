@@ -44,11 +44,12 @@ const RouteCustomer = () => {
   }
 
   return (
-    <div>
+    <div className="cont">
       <p className="cus-name">Name: {name}</p>
-      <p className="cus-email">Email: {email}</p>
-      <Link to={`/customer-update/${cId}`} className="btn-update">Edit</Link>
+      <p className="cus-email" style={{ marginBottom: "30px" }}>Email: {email}</p>
+      <Link to={`/customer-update/${cId}`} className="btn btn-add btn-update">Edit</Link>
 
+      <h2 className="sub-heading">History</h2>
       <CreateHistory cId={cId} createHistory={createHistory} />
       <Histories histories={histories} />
     </div>

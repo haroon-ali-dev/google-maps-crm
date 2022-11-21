@@ -9,7 +9,7 @@ const Histories = ({ histories }) => {
           <li key={i}>
             <p className="history-date"><Moment format="DD-MM-YYYY" >{history.date}</Moment></p>
             <p className="history-info">{history.info}</p>
-            <Link to={`/history-update/${history._id}`} className="btn-update update-history">Edit</Link>
+            <Link to={`/history-update/${history._id}`} className="btn btn-view btn-update update-history">Edit</Link>
           </li>
         ))}
       </ul>

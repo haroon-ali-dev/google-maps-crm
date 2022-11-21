@@ -51,7 +51,7 @@ const RouteCustomerUpdate = () => {
   }
 
   return (
-    <div>
+    <div className="cont">
       <form onSubmit={submit}>
         <div>
           <label>
@@ -66,7 +66,7 @@ const RouteCustomerUpdate = () => {
           </label>
         </div>
         <div>
-          <button id="btn-update" type="submit">Update</button>
+          <button className="btn btn-add" id="btn-update" type="submit">Update</button>
         </div>
       </form>
     </div>

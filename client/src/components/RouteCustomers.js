@@ -26,8 +26,11 @@ const RouteCustomers = () => {
 
   return (
     <div>
-      <CreateCustomer createCustomer={createCustomer} />
-      <Customers customers={customers} />
+      <h1 className="heading">Simple Customer Relationship Manager</h1>
+      <div className="cont">
+        <CreateCustomer createCustomer={createCustomer} />
+        <Customers customers={customers} />
+      </div>
     </div>
   );
 }
