@@ -93,7 +93,7 @@ a {
 ul {
   list-style-type: none;
   font-size: 20px;
-  /* width: 50%; */
+  width: 75%;
   margin: 30px auto 0px auto;
 }
 
@@ -101,17 +101,16 @@ li {
   background-color: #009379;
   border-radius: 20px;
   padding: 20px;
-  margin-bottom: 20px;
   color: black;
 }
 
-li > p {
-  margin-bottom: 20px;
+.cus-name {
+  font-size: 20px;
 }
 
-.cus-name, .cus-email {
-  font-size: 20px;
+.cus-email {
   margin-bottom: 20px;
+  font-size: 10px;
 }
 
 .form-create-history {
