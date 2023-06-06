@@ -106,11 +106,13 @@ li {
 
 .cus-name {
   font-size: 20px;
+  color: white;
 }
 
 .cus-email {
   margin-bottom: 20px;
   font-size: 10px;
+  color: white;
 }
 
 .form-create-history {
@@ -138,10 +140,26 @@ textarea {
   .cont {
     width: 60%;
   }
+
+  ul {
+    width: 60%;
+  }
+}
+
+@media (min-width: 576px) {
+  .cus-email {
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 992px) {
   .cont {
-    width: 40%;
+    width: 35%;
+  }
+}
+
+@media (min-width: 1400px) {
+  ul {
+    width: 50%;
   }
 }
