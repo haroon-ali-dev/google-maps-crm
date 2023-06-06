@@ -28,18 +28,19 @@ code {
 
 .cont {
   background-color: #3B3B3B;
-  width: 50%;
+  width: 80%;
   border-radius: 20px;
   margin: 100px auto 100px auto;
-  padding: 50px;
+  padding: 25px 0px 25px 0px;
 }
 
 form {
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   font-size: 20px;
+  gap: 10px;
 }
 
 .form-input-container {
@@ -47,12 +48,15 @@ form {
 }
 
 input {
+  width: 100%;
   margin-top: 10px;
   font-size: 20px;
   border-radius: 20px;
   height: 40px;
-  padding-left: 20px;
+  padding: 0px 20px 0px 20px;
+  box-sizing: border-box;
   border: none;
+  outline: none;
 }
 
 label {
@@ -71,7 +75,7 @@ label {
 }
 
 .btn-add {
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: #E2412E;
   color: white;
 }
@@ -89,7 +93,7 @@ a {
 ul {
   list-style-type: none;
   font-size: 20px;
-  width: 50%;
+  /* width: 50%; */
   margin: 30px auto 0px auto;
 }
 
