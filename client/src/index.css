@@ -102,6 +102,7 @@ li {
   border-radius: 20px;
   padding: 20px;
   color: black;
+  margin-bottom: 10px;
 }
 
 .cus-name {
@@ -111,7 +112,7 @@ li {
 
 .cus-email {
   margin-bottom: 20px;
-  font-size: 10px;
+  font-size: 13px;
   color: white;
 }
 
@@ -134,6 +135,14 @@ textarea {
   border-radius: 20px;
   padding: 20px;
   margin-top: 10px;
+}
+
+.cont-cust-page {
+  background-color: #3B3B3B;
+  width: 70%;
+  border-radius: 20px;
+  margin: 100px auto 100px auto;
+  padding: 25px 25px 25px 25px;
 }
 
 @media (min-width: 576px) {

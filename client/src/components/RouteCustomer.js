@@ -44,7 +44,7 @@ const RouteCustomer = () => {
   }
 
   return (
-    <div className="cont">
+    <div className="cont-cust-page">
       <p className="cus-name">Name: {name}</p>
       <p className="cus-email" style={{ marginBottom: "30px" }}>Email: {email}</p>
       <Link to={`/customer-update/${cId}`} className="btn btn-add btn-update">Edit</Link>
