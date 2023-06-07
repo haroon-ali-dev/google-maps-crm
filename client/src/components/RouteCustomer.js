@@ -46,7 +46,7 @@ const RouteCustomer = () => {
   return (
     <div className="cont-cust-page">
       <h2>{name}</h2>
-      <p style={{ marginBottom: "30px" }}>{email}</p>
+      <p style={{ marginBottom: "20px" }}>{email}</p>
       <Link to={`/customer-update/${cId}`} className="btn btn-add btn-update">Edit</Link>
 
       <h2 className="sub-heading">History</h2>
