@@ -161,6 +161,10 @@ textarea {
     width: 60%;
   }
 
+  .cont-cust-page {
+    width: 60%;
+  }
+
   ul {
     width: 60%;
   }
@@ -174,6 +178,10 @@ textarea {
 
 @media (min-width: 992px) {
   .cont {
+    width: 35%;
+  }
+
+  .cont-cust-page {
     width: 35%;
   }
 }
