@@ -100,7 +100,7 @@ ul {
 li {
   background-color: #009379;
   border-radius: 20px;
-  padding: 20px;
+  padding: 20px 20px 28px 20px;
   color: black;
   margin-bottom: 10px;
 }
@@ -143,6 +143,17 @@ textarea {
   border-radius: 20px;
   margin: 100px auto 100px auto;
   padding: 25px 25px 25px 25px;
+}
+
+.history-date {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.history-info {
+  color: white;
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 
 @media (min-width: 576px) {
