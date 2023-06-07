@@ -35,12 +35,12 @@ code {
 }
 
 form {
-  width: 80%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 80%;
   font-size: 20px;
   gap: 10px;
+  justify-content: center;
 }
 
 .form-input-container {
@@ -117,13 +117,10 @@ li {
 }
 
 .form-create-history {
-  margin-top: 30px;
-  grid-template-columns: 1fr;
+  margin: 30px 0px 0px 0px;
+  grid-template-columns: 80%;
   row-gap: 20px;
-}
-
-input[type="date"] {
-  padding-right: 20px;
+  justify-content: center;
 }
 
 .sub-heading {
@@ -132,9 +129,12 @@ input[type="date"] {
 }
 
 textarea {
+  width: 100%;
   border-radius: 20px;
   padding: 20px;
   margin-top: 10px;
+  outline: none;
+  box-sizing: border-box;
 }
 
 .cont-cust-page {
