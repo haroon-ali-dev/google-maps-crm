@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../model/user");
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 router.post("/", async (req, res) => {
     const { error } = validate(req.body);
@@ -13,7 +15,9 @@ router.post("/", async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send({ message: "Invalid email or password." });
 
-    res.send("ok");
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.jwtPrivateKey);
+
+    res.json({ token });
 });
 
 module.exports = router;

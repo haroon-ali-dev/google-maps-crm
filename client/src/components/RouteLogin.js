@@ -23,13 +23,7 @@ const RouteLogin = () => {
       const data = await res.json();
 
       if (res.status === 200) {
-        setEmail("");
-        setPassword("");
-        setNotification({
-          message: data.message,
-          display: "block",
-          bgColor: "#009379"
-        });
+        console.log(data.token);
       } else {
         setNotification({
           message: data.message,
