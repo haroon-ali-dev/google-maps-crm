@@ -1,3 +1,4 @@
+const users = require("./routes/users");
 const customers = require("./routes/customers");
 const histories = require("./routes/histories");
 const cors = require("cors");
@@ -8,6 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/users", users);
 app.use("/api/customers", customers);
 app.use("/api/histories", histories);
 
