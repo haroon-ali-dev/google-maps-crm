@@ -23,12 +23,34 @@ const RouteRegister = () => {
       const data = await res.json();
 
       if (res.status === 200) {
-        console.log(data.message);
+        setEmail("");
+        setPassword("");
+        setNotification({
+          message: data.message,
+          display: "block",
+          bgColor: "#009379"
+        });
       } else {
-        console.log(data.message);
+        setNotification({
+          message: data.message,
+          display: "block",
+          bgColor: "#E2412E"
+        });
       }
     } catch (error) {
-      console.log(error.message);
+      setNotification({
+        message: error.message,
+        display: "block",
+        bgColor: "#E2412E"
+      });
+    } finally {
+      setTimeout(() => {
+        setNotification({
+          message: "",
+          display: "none",
+          bgColor: "#E2412E"
+        });
+      }, 3000);
     }
   }
 
