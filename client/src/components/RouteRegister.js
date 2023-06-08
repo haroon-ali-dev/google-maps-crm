@@ -2,6 +2,11 @@ import { useState } from "react";
 import Notification from "./Notification";
 
 const RouteRegister = () => {
+  const [notification, setNotification] = useState({
+    message: "",
+    display: "none",
+    bgColor: ""
+  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -62,7 +67,11 @@ const RouteRegister = () => {
           <button className="btn btn-add" id="btn-add" type="submit">Register</button>
         </div>
       </form>
-      <Notification />
+      <Notification
+        message={notification.message}
+        display={notification.display}
+        bgColor={notification.bgColor}
+      />
     </div>
   );
 }
