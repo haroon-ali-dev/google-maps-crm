@@ -14,7 +14,7 @@ const RouteLogin = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3001/api/register", {
+      const res = await fetch("http://localhost:3001/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -86,7 +86,7 @@ const RouteLogin = () => {
           </label>
         </div>
         <div className="form-submit-container">
-          <button className="btn btn-add" id="btn-add" type="submit">Register</button>
+          <button className="btn btn-add" id="btn-add" type="submit">Login</button>
         </div>
       </form>
       <Notification
