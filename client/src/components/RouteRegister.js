@@ -37,7 +37,7 @@ const RouteRegister = () => {
               value={password}
               onChange={(e) => { setPassword(e.target.value); }}
               minLength="3"
-              maxLength="10"
+              maxLength="15"
               required />
           </label>
         </div>
