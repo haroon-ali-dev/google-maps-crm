@@ -15,8 +15,8 @@ const Header = () => {
       <nav className="navbar">
         {!token &&
           <>
-            <Link>Register</Link>
-            <Link>Login</Link>
+            <Link className="btn btn-nav" to="/">Register</Link>
+            <Link className="btn btn-nav" to="/login">Login</Link>
           </>
         }
         {token && <button onClick={logout}>Logout</button>}

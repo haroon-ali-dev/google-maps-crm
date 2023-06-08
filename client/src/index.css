@@ -22,8 +22,15 @@ code {
 }
 
 .navbar {
-  height: 50px;
   background-color: #3B3B3B;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn-nav {
+  background-color: white;
 }
 
 .heading {
