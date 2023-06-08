@@ -7,7 +7,23 @@ const RouteRegister = () => {
   const submit = async (e) => {
     e.preventDefault();
 
+    try {
+      const res = await fetch("http://localhost:3001/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
 
+      const data = await res.json();
+
+      if (res.status === 200) {
+        console.log(data.message);
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   return (
