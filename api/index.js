@@ -1,4 +1,5 @@
 const register = require("./routes/register");
+const login = require("./routes/login");
 const customers = require("./routes/customers");
 const histories = require("./routes/histories");
 const cors = require("cors");
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/register", register);
+app.use("/api/login", login);
 app.use("/api/customers", customers);
 app.use("/api/histories", histories);
 
