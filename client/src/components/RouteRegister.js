@@ -7,7 +7,7 @@ const RouteRegister = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    
+
   }
 
   return (
@@ -15,16 +15,30 @@ const RouteRegister = () => {
       <form onSubmit={submit}>
         <div className="form-input-container">
           <label>
-            Name
+            Email
             <br />
-            <input id="email" type="text" value={email} onChange={(e) => { setEmail(e.target.value); }} required />
+            <input
+              id="email"
+              type="text"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); }}
+              minLength="3"
+              maxLength="256"
+              required />
           </label>
         </div>
         <div className="form-input-container">
           <label>
-            Email
+            Password
             <br />
-            <input id="password" type="email" value={password} onChange={(e) => { setPassword(e.target.value); }} required />
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); }}
+              minLength="3"
+              maxLength="10"
+              required />
           </label>
         </div>
         <div className="form-submit-container">
