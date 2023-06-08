@@ -156,6 +156,15 @@ textarea {
   margin-bottom: 20px;
 }
 
+.notification {
+  background-color: green;
+  width: 65%;
+  margin: 20px auto 0px auto;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
 @media (min-width: 576px) {
   .cont {
     width: 60%;

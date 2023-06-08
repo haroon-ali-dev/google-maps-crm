@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Notification from "./Notification";
 
 const RouteRegister = () => {
   const [email, setEmail] = useState("");
@@ -61,6 +62,7 @@ const RouteRegister = () => {
           <button className="btn btn-add" id="btn-add" type="submit">Register</button>
         </div>
       </form>
+      <Notification />
     </div>
   );
 }
