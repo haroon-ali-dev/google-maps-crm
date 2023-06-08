@@ -21,6 +21,11 @@ code {
     monospace;
 }
 
+.navbar {
+  height: 50px;
+  background-color: #3B3B3B;
+}
+
 .heading {
   text-align: center;
   margin-top: 100px;
