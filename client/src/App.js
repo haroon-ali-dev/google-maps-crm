@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
 import RouteCustomer from "./components/RouteCustomer";
 import RouteCustomers from "./components/RouteCustomers";
 import RouteCustomerUpdate from "./components/RouteCustomerUpdate";
@@ -7,6 +8,7 @@ import RouteHistoryUpdate from "./components/RouteHistoryUpdate";
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<RouteCustomers />} />
         <Route path="customer/:cId" element={<RouteCustomer />} />
