@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CreateCustomer from "./CreateCustomer";
 import Customers from "./Customers";
 import jwt from "jwt-decode";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 const RouteCustomers = () => {
   const [customers, setCustomers] = useState([]);

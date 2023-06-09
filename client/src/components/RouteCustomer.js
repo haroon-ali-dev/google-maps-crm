@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CreateHistory from "./CreateHistory";
 import Histories from "./Histories";
+import { motion } from "framer-motion";
 
 const RouteCustomer = () => {
   const { cId } = useParams();
@@ -50,15 +51,21 @@ const RouteCustomer = () => {
   }
 
   return (
-    <div className="cont-cust-page">
-      <h2>{name}</h2>
-      <p style={{ marginBottom: "20px" }}>{email}</p>
-      <Link to={`/customer-update/${cId}`} className="btn btn-add btn-update">Edit</Link>
+    <motion.div
+      initial={{ opacity: 0, x: +200 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ ease: "easeOut", duration: 1.5 }}
+    >
+      <div className="cont-cust-page">
+        <h2>{name}</h2>
+        <p style={{ marginBottom: "20px" }}>{email}</p>
+        <Link to={`/customer-update/${cId}`} className="btn btn-add btn-update">Edit</Link>
 
-      <h2 className="sub-heading">History</h2>
-      <CreateHistory cId={cId} createHistory={createHistory} />
-      <Histories histories={histories} />
-    </div>
+        <h2 className="sub-heading">History</h2>
+        <CreateHistory cId={cId} createHistory={createHistory} />
+        <Histories histories={histories} />
+      </div>
+    </motion.div>
   );
 }
 
