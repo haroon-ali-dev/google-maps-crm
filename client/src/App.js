@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import ProtectedLogin from "./components/ProtectedLogin";
+import ProtectedLogout from "./components/ProtectedLogout";
 import RouteRegister from "./components/RouteRegister";
 import RouteLogin from "./components/RouteLogin";
 import RouteCustomer from "./components/RouteCustomer";
@@ -12,12 +14,12 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<RouteRegister />} />
-        <Route path="/login" element={<RouteLogin />} />
-        <Route path="/customers" element={<RouteCustomers />} />
-        <Route path="customer/:cId" element={<RouteCustomer />} />
-        <Route path="customer-update/:cId" element={<RouteCustomerUpdate />} />
-        <Route path="history-update/:hId" element={<RouteHistoryUpdate />} />
+        <Route path="/" element={<ProtectedLogout><RouteRegister /></ProtectedLogout>} />
+        <Route path="/login" element={<ProtectedLogout><RouteLogin /></ProtectedLogout>} />
+        <Route path="/customers" element={<ProtectedLogin><RouteCustomers /></ProtectedLogin>} />
+        <Route path="/customer/:cId" element={<ProtectedLogin><RouteCustomer /></ProtectedLogin>} />
+        <Route path="/customer-update/:cId" element={<ProtectedLogin><RouteCustomerUpdate /></ProtectedLogin>} />
+        <Route path="/history-update/:hId" element={<ProtectedLogin><RouteHistoryUpdate /></ProtectedLogin>} />
       </Routes>
     </BrowserRouter>
   );

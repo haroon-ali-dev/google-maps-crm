@@ -8,7 +8,7 @@ const Customers = ({ customers }) => {
           <li key={i}>
             <p className="cus-name">{customer.name}</p>
             <p className="cus-email">{customer.email}</p>
-            <Link to={`customer/${customer._id}`} className="btn btn-view">View</Link>
+            <Link to={`/customer/${customer._id}`} className="btn btn-view">View</Link>
           </li>
         ))}
       </ul>
