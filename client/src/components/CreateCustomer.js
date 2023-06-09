@@ -23,7 +23,7 @@ const CreateCustomer = ({ createCustomer }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:30012/api/customers", {
+      const res = await fetch("http://localhost:3001/api/customers", {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ userId: uId, name, email })
