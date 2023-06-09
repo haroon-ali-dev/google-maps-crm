@@ -10,9 +10,13 @@ const RouteCustomer = () => {
 
   const [histories, setHistories] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const getCustomerInfo = async () => {
-      const res = await fetch(`http://localhost:3001/api/customers/${cId}`);
+      const res = await fetch(`http://localhost:3001/api/customers/${cId}`, {
+        headers: { "x-auth-token": token }
+      });
 
       const data = await res.json();
       if (data.message === "success") {
@@ -26,7 +30,9 @@ const RouteCustomer = () => {
     getCustomerInfo();
 
     const getHistories = async () => {
-      const res = await fetch(`http://localhost:3001/api/histories/customer/${cId}`);
+      const res = await fetch(`http://localhost:3001/api/histories/customer/${cId}`, {
+        headers: { "x-auth-token": token }
+      });
 
       const data = await res.json();
       if (data.message === "success") {
@@ -37,7 +43,7 @@ const RouteCustomer = () => {
     }
 
     getHistories();
-  }, [cId]);
+  }, [cId, token]);
 
   const createHistory = (history) => {
     setHistories([...histories, history]);

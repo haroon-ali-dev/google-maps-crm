@@ -8,9 +8,13 @@ const RouteCustomerUpdate = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const getCustomerInfo = async () => {
-      const res = await fetch(`http://localhost:3001/api/customers/${cId}`);
+      const res = await fetch(`http://localhost:3001/api/customers/${cId}`, {
+        headers: { "x-auth-token": token }
+      });
 
       const data = await res.json();
       if (data.message === "success") {
@@ -22,7 +26,7 @@ const RouteCustomerUpdate = () => {
     }
 
     getCustomerInfo();
-  }, [cId]);
+  }, [cId, token]);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -34,7 +38,7 @@ const RouteCustomerUpdate = () => {
     try {
       const res = await fetch(`http://localhost:3001/api/customers/${cId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ name, email })
       });
 

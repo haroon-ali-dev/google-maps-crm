@@ -4,6 +4,8 @@ const CreateCustomer = ({ createCustomer }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const token = localStorage.getItem("token");
+
   const submit = async (e) => {
     e.preventDefault();
 
@@ -14,7 +16,7 @@ const CreateCustomer = ({ createCustomer }) => {
     try {
       const res = await fetch("http://localhost:3001/api/customers", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ name, email })
       });
 
