@@ -2,7 +2,7 @@
 
 <img src="./screenshot.png" alt="screenshot" title="screenshot">
 
-## A full-stack project built using HTML, CSS, JavaScript, React, Node.js, MongoDB with E2E tests using Jest and Puppeteer.
+## A full-stack project built using HTML, CSS, JavaScript, React, Node.js and MongoDB.
 
 ## How To Run Locally
 
@@ -23,7 +23,7 @@ Then run a mongodb server (with no username/password) at:
 Then in /api/ start node server:
 
 ```bash
-node index.js
+npm start
 ```
 
 ### Setup front-end
@@ -38,12 +38,4 @@ Then start react server:
 
 ```bash
 npm start
-```
-
-## How To Run E2E Tests
-
-In /client/ run:
-
-```bash
-npm run test:e2e
 ```
