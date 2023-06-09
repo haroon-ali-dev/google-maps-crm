@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import jwt from "jwt-decode";
+import { motion, AnimatePresence } from "framer-motion";
+import Notification from "./Notification";
 
 const RouteCustomerUpdate = () => {
   const navigate = useNavigate();
 
+  const [notification, setNotification] = useState({
+    message: "",
+    display: false,
+    bgColor: ""
+  });
   const { cId } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -45,37 +52,74 @@ const RouteCustomerUpdate = () => {
       });
 
       const data = await res.json();
-      if (data.message === "success") {
+
+      if (res.status === 200) {
         navigate(`/customer/${cId}`);
       } else {
-        alert(data.message);
+        setNotification({
+          message: data.message,
+          display: true,
+          bgColor: "#E2412E"
+        });
       }
-
     } catch (error) {
-      alert(error.message);
+      setNotification({
+        message: error.message,
+        display: true,
+        bgColor: "#E2412E"
+      });
+    } finally {
+      setTimeout(() => {
+        setNotification({
+          message: "",
+          display: false,
+          bgColor: "#E2412E"
+        });
+      }, 3000);
     }
   }
 
   return (
-    <div className="cont">
-      <form onSubmit={submit}>
-        <div>
-          <label>
-            Name
-            <input id="name" type="text" value={name} onChange={(e) => { setName(e.target.value); }} required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Email
-            <input id="email" type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} required />
-          </label>
-        </div>
-        <div>
-          <button className="btn btn-add" id="btn-update" type="submit">Update</button>
-        </div>
-      </form>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, x: +200 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ ease: "easeOut", duration: 1.5 }}
+    >
+      <div className="cont">
+        <form onSubmit={submit}>
+          <div>
+            <label>
+              Name
+              <input id="name" type="text" value={name} onChange={(e) => { setName(e.target.value); }} required />
+            </label>
+          </div>
+          <div>
+            <label>
+              Email
+              <input id="email" type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} required />
+            </label>
+          </div>
+          <div>
+            <button className="btn btn-add" id="btn-update" type="submit">Update</button>
+          </div>
+        </form>
+        <AnimatePresence>
+          {notification.display && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 1.5 }}
+              exit={{ opacity: 0 }}
+            >
+              <Notification
+                message={notification.message}
+                bgColor={notification.bgColor}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
   );
 }
 
