@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const { History, validateCreate, validateUpdate } = require("../model/history");
+const auth = require("../middleware/auth");
 
-
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
     const history = await History.findOne({ _id: req.params.id });
 
@@ -14,7 +14,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get("/customer/:id", async (req, res) => {
+router.get("/customer/:id", auth, async (req, res) => {
   try {
     const histories = await History.find({ customerId: req.params.id });
 
@@ -24,8 +24,7 @@ router.get("/customer/:id", async (req, res) => {
   }
 });
 
-router.post("/:id", async (req, res) => {
-  // console.log(req.body);
+router.post("/:id", auth, async (req, res) => {
   const { error } = validateCreate(req.body);
   if (error) return res.status(400).json({ message: error.message });
 
@@ -43,7 +42,7 @@ router.post("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const { error } = validateUpdate(req.body);
   if (error) return res.status(400).json({ message: error.message });
 

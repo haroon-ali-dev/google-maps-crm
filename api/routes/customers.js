@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { Customer, validate } = require("../model/customer");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const customers = await Customer.find();
 
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
     const customer = await Customer.findOne({ _id: req.params.id });
 
@@ -22,7 +23,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   // console.log(req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).json({ message: error.message });
@@ -37,7 +38,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).json({ message: error.message });
 
