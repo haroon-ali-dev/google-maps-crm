@@ -24,7 +24,6 @@ router.get("/:id", auth, async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
-  // console.log(req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).json({ message: error.message });
 

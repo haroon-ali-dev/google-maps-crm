@@ -1,10 +1,12 @@
 import { useState } from "react";
+import jwt from "jwt-decode";
 
 const CreateCustomer = ({ createCustomer }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const token = localStorage.getItem("token");
+  const { uId } = jwt(token);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ const CreateCustomer = ({ createCustomer }) => {
       const res = await fetch("http://localhost:3001/api/customers", {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ name, email })
+        body: JSON.stringify({ userId: uId, name, email })
       });
 
       const data = await res.json();
