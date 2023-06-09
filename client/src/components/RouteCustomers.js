@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import CreateCustomer from "./CreateCustomer";
 import Customers from "./Customers";
+import jwt from "jwt-decode";
 
 const RouteCustomers = () => {
   const [customers, setCustomers] = useState([]);
 
   const token = localStorage.getItem("token");
+  const { uId } = jwt(token);
 
   useEffect(() => {
     const getCustomers = async () => {
-      const res = await fetch("http://localhost:3001/api/customers", {
+      const res = await fetch(`http://localhost:3001/api/customers/user/${uId}`, {
         headers: { "x-auth-token": token }
       });
       const data = await res.json();
@@ -22,7 +24,7 @@ const RouteCustomers = () => {
     }
 
     getCustomers();
-  }, [token]);
+  }, [token, uId]);
 
   const createCustomer = (customer) => {
     setCustomers([...customers, customer]);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import jwt from "jwt-decode";
 
 const RouteCustomerUpdate = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const RouteCustomerUpdate = () => {
   const [email, setEmail] = useState("");
 
   const token = localStorage.getItem("token");
+  const { uId } = jwt(token);
 
   useEffect(() => {
     const getCustomerInfo = async () => {
@@ -39,7 +41,7 @@ const RouteCustomerUpdate = () => {
       const res = await fetch(`http://localhost:3001/api/customers/${cId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ name, email })
+        body: JSON.stringify({ userId: uId, name, email })
       });
 
       const data = await res.json();

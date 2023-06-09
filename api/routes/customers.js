@@ -3,9 +3,9 @@ const router = express.Router();
 const { Customer, validate } = require("../model/customer");
 const auth = require("../middleware/auth");
 
-router.get("/", auth, async (req, res) => {
+router.get("/user/:uId", auth, async (req, res) => {
   try {
-    const customers = await Customer.find();
+    const customers = await Customer.find({ userId: req.params.uId });
 
     res.json({ message: "success", customers });
   } catch (error) {

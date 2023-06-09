@@ -5,6 +5,8 @@ const CreateHistory = ({ cId, createHistory }) => {
   const [date, setDate] = useState("2022-05-05");
   const [info, setInfo] = useState("");
 
+  const token = localStorage.getItem("token");
+
   const submit = async (e) => {
     e.preventDefault();
 
@@ -15,7 +17,7 @@ const CreateHistory = ({ cId, createHistory }) => {
     try {
       const res = await fetch(`http://localhost:3001/api/histories/${cId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ customerId: cId, date, info })
       });
 
