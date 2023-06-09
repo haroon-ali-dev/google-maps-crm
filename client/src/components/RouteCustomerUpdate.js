@@ -54,7 +54,7 @@ const RouteCustomerUpdate = () => {
       const data = await res.json();
 
       if (res.status === 200) {
-        navigate(`/customer/${cId}`);
+        navigate(-1);
       } else {
         setNotification({
           message: data.message,
