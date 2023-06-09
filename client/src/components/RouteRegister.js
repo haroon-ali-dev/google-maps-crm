@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import Notification from "./Notification";
 
 const RouteRegister = () => {
   const [notification, setNotification] = useState({
     message: "",
-    display: "none",
+    display: false,
     bgColor: ""
   });
   const [email, setEmail] = useState("");
@@ -28,27 +28,27 @@ const RouteRegister = () => {
         setPassword("");
         setNotification({
           message: data.message,
-          display: "block",
+          display: true,
           bgColor: "#009379"
         });
       } else {
         setNotification({
           message: data.message,
-          display: "block",
+          display: true,
           bgColor: "#E2412E"
         });
       }
     } catch (error) {
       setNotification({
         message: error.message,
-        display: "block",
+        display: true,
         bgColor: "#E2412E"
       });
     } finally {
       setTimeout(() => {
         setNotification({
           message: "",
-          display: "none",
+          display: false,
           bgColor: "#E2412E"
         });
       }, 3000);
@@ -95,14 +95,23 @@ const RouteRegister = () => {
             <button className="btn btn-add" id="btn-add" type="submit">Register</button>
           </div>
         </form>
-        <Notification
-          message={notification.message}
-          display={notification.display}
-          bgColor={notification.bgColor}
-        />
+        <AnimatePresence>
+          {notification.display && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 1.5 }}
+              exit={{ opacity: 0 }}
+            >
+              <Notification
+                message={notification.message}
+                bgColor={notification.bgColor}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
-
   );
 }
 

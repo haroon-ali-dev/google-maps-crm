@@ -1,6 +1,6 @@
-export default function Notification({ message, display, bgColor }) {
+export default function Notification({ message, bgColor }) {
     return (
-        <div className="notification" style={{ display, backgroundColor: bgColor }}>
+        <div className="notification" style={{ backgroundColor: bgColor }}>
             <span>{message}</span>
         </div>
     );
