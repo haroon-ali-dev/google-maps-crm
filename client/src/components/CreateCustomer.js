@@ -41,14 +41,14 @@ const CreateCustomer = ({ createCustomer }) => {
           <label>
             Name
             <br />
-            <input id="name" type="text" value={name} onChange={(e) => { setName(e.target.value); }} required />
+            <input id="name" type="text" value={name} onChange={(e) => { setName(e.target.value); }} min="3" max="50" required />
           </label>
         </div>
         <div className="form-input-container">
           <label>
             Email
             <br />
-            <input id="email" type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} required />
+            <input id="email" type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} min="3" max="256" required />
           </label>
         </div>
         <div className="form-submit-container">

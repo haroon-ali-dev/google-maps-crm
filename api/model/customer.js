@@ -16,7 +16,7 @@ const customerSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 3,
-    maxLength: 50
+    maxLength: 256
   }
 });
 
@@ -26,7 +26,7 @@ function validate(customer) {
   const schema = Joi.object({
     userId: Joi.string().required(),
     name: Joi.string().min(3).max(50).required(),
-    email: Joi.string().min(3).max(50).required()
+    email: Joi.string().min(3).max(256).required()
   });
 
   return schema.validate(customer);

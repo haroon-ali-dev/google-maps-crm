@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CreateCustomer from "./CreateCustomer";
 import Customers from "./Customers";
 import jwt from "jwt-decode";
+import { motion } from "framer-motion"
 
 const RouteCustomers = () => {
   const [customers, setCustomers] = useState([]);
@@ -31,12 +32,18 @@ const RouteCustomers = () => {
   }
 
   return (
-    <div>
-      <div className="cont">
-        <CreateCustomer createCustomer={createCustomer} />
-        <Customers customers={customers} />
+    <motion.div
+      initial={{ opacity: 0, x: +200 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ ease: "easeOut", duration: 1.5 }}
+    >
+      <div>
+        <div className="cont">
+          <CreateCustomer createCustomer={createCustomer} />
+          <Customers customers={customers} />
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
