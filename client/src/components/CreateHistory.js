@@ -1,7 +1,14 @@
 import { useState } from "react";
 import moment from "moment";
+import { motion, AnimatePresence } from "framer-motion";
+import Notification from "./Notification";
 
 const CreateHistory = ({ cId, createHistory }) => {
+  const [notification, setNotification] = useState({
+    message: "",
+    display: false,
+    bgColor: ""
+  });
   const [date, setDate] = useState("2022-05-05");
   const [info, setInfo] = useState("");
 
@@ -22,14 +29,30 @@ const CreateHistory = ({ cId, createHistory }) => {
       });
 
       const data = await res.json();
-      if (data.message === "success") {
+
+      if (res.status === 200) {
         createHistory(data.history);
       } else {
-        alert(data.message);
+        setNotification({
+          message: data.message,
+          display: true,
+          bgColor: "#E2412E"
+        });
       }
-
     } catch (error) {
-      alert(error.message);
+      setNotification({
+        message: error.message,
+        display: true,
+        bgColor: "#E2412E"
+      });
+    } finally {
+      setTimeout(() => {
+        setNotification({
+          message: "",
+          display: false,
+          bgColor: "#E2412E"
+        });
+      }, 3000);
     }
   }
 
@@ -54,6 +77,21 @@ const CreateHistory = ({ cId, createHistory }) => {
           <button className="btn btn-add" id="btn-add" type="submit" style={{ marginTop: "0px" }}>Add</button>
         </div>
       </form>
+      <AnimatePresence>
+        {notification.display && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ease: "easeOut", duration: 1.5 }}
+            exit={{ opacity: 0 }}
+          >
+            <Notification
+              message={notification.message}
+              bgColor={notification.bgColor}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
