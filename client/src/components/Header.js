@@ -15,11 +15,11 @@ const Header = () => {
       <nav className="navbar">
         {!token &&
           <>
-            <Link className="btn btn-nav" to="/">Register</Link>
-            <Link className="btn btn-nav" to="/login">Login</Link>
+            <Link to="/"><button className="btn btn-nav">Register</button></Link>
+            <Link to="/login"><button className="btn btn-nav">Login</button></Link>
           </>
         }
-        {token && <button onClick={logout}>Logout</button>}
+        {token && <button className="btn btn-nav" onClick={logout}>Logout</button>}
       </nav>
       <h1 className="heading">Simple Customer Relationship Manager</h1>
     </header>

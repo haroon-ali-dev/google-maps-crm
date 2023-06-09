@@ -21,16 +21,50 @@ code {
     monospace;
 }
 
-.navbar {
-  background-color: #3B3B3B;
+.btn {
+  border-radius: 20px;
+  font-size: 15px;
+  border: none;
+  padding: 10px 30px 10px 30px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-add {
+  margin-top: 10px;
+  background-color: #E2412E;
+  color: white;
+}
+
+.btn-view {
+  background-color: white;
+  color: black;
 }
 
 a {
   text-decoration: none;
+  width: 100px;
+}
+
+.navbar {
+  background-color: #3B3B3B;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .btn-nav {
   background-color: white;
+  width: 100px;
+  padding: 10px 0px 10px 0px;
+}
+
+.btn-nav:hover {
+  background-color:#E2412E;
+  color: white;
 }
 
 .heading {
@@ -73,33 +107,6 @@ input {
 
 label {
   margin-left: 10px;
-}
-
-.btn {
-  border-radius: 20px;
-  font-size: 15px;
-  border: none;
-  padding: 10px 30px 10px 30px;
-}
-
-.btn:hover {
-  cursor: pointer;
-}
-
-.btn-add {
-  margin-top: 10px;
-  background-color: #E2412E;
-  color: white;
-}
-
-.btn-view {
-  background-color: white;
-  color: black;
-}
-
-a {
-  text-decoration: none;
-  width: 100px;
 }
 
 ul {
