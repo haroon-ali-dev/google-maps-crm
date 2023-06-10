@@ -1,3 +1,4 @@
+const config = require("config");
 const register = require("./routes/register");
 const login = require("./routes/login");
 const customers = require("./routes/customers");
@@ -20,7 +21,7 @@ app.listen(port, async () => {
   console.log(`Listening on port ${port}...`);
 
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/crm");
+    await mongoose.connect(config.get("mongoURL"));
     console.log("Connected to MongoDB...");
   } catch (error) {
     console.log("Error connecting to MongoDB...")
