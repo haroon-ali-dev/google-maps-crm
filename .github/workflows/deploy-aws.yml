@@ -1,0 +1,59 @@
+name: AWS Deploy
+
+# run job when event triggered when pushes done to the main branch, only in 'server' folder.
+# for pull requests merged into main, 'pull_request' must be used.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'api/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # access the repo
+      - uses: actions/checkout@v3
+      # setup Node.js with caching for dependencies
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+          cache-dependency-path: 'api/package-lock.json'
+      # install dependencies using 'npm ci' which installs using package-lock.json (faster)
+      - name: Install dependencies
+        run: npm ci
+        working-directory: api
+      # create zip file
+      - name: Generate zip file
+        run: (cd api && zip -r "$OLDPWD/deploy.zip" .)
+      # create timestamp
+      - name: Create timestamp
+        uses: gerred/actions/current-time@master
+        id: current-time
+      # format timestamp
+      - name: Format timestamp
+        uses: frabert/replace-string-action@master
+        id: format-time
+        with:
+          pattern: '[:\.]+'
+          string: "${{ steps.current-time.outputs.time }}"
+          replace-with: '-'
+          flags: 'g'
+      # delpoy to AWS
+      - name: Deploy to AWS Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v16
+        with:
+          aws_access_key: ${{secrets.AWS_ACCESS_KEY}}
+          aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          application_name: simple-crm
+          environment_name: Simple-crm-env
+          region: eu-west-2
+          version_label: "version-${{ steps.format-time.outputs.replaced }}"
+          deployment_package: deploy.zip
+      # print to console
+      - name: Print to console
+        run: echo "Deployed!"
