@@ -18,7 +18,7 @@ const RouteLogin = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("http://localhost:3001/api/login", {
+            const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })

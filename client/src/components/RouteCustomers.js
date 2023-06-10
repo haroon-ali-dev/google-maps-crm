@@ -12,7 +12,7 @@ const RouteCustomers = () => {
 
   useEffect(() => {
     const getCustomers = async () => {
-      const res = await fetch(`http://localhost:3001/api/customers/user/${uId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/user/${uId}`, {
         headers: { "x-auth-token": token }
       });
       const data = await res.json();

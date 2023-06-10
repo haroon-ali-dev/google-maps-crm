@@ -21,7 +21,7 @@ const RouteCustomerUpdate = () => {
 
   useEffect(() => {
     const getCustomerInfo = async () => {
-      const res = await fetch(`http://localhost:3001/api/customers/${cId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/${cId}`, {
         headers: { "x-auth-token": token }
       });
 
@@ -45,7 +45,7 @@ const RouteCustomerUpdate = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/api/customers/${cId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/${cId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ userId: uId, name, email })

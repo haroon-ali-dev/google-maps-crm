@@ -22,7 +22,7 @@ const CreateHistory = ({ cId, createHistory }) => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/api/histories/${cId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/${cId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ customerId: cId, date, info })

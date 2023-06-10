@@ -15,7 +15,7 @@ const RouteCustomer = () => {
 
   useEffect(() => {
     const getCustomerInfo = async () => {
-      const res = await fetch(`http://localhost:3001/api/customers/${cId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/${cId}`, {
         headers: { "x-auth-token": token }
       });
 
@@ -31,7 +31,7 @@ const RouteCustomer = () => {
     getCustomerInfo();
 
     const getHistories = async () => {
-      const res = await fetch(`http://localhost:3001/api/histories/customer/${cId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/customer/${cId}`, {
         headers: { "x-auth-token": token }
       });
 

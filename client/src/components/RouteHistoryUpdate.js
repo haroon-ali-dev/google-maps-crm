@@ -20,7 +20,7 @@ const RouteHistoryUpdate = () => {
 
   useEffect(() => {
     const getHistory = async () => {
-      const res = await fetch(`http://localhost:3001/api/histories/${hId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/${hId}`, {
         headers: { "x-auth-token": token }
       });
 
@@ -45,7 +45,7 @@ const RouteHistoryUpdate = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/api/histories/${hId}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/${hId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ date, info })
