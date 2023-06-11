@@ -13,7 +13,7 @@ import RouteHistoryUpdate from "./components/RouteHistoryUpdate";
 export const AppContext = React.createContext();
 
 function App() {
-  const apiURL = (process.env.NODE_ENV === "production") ? "http://simple-crm.eu-west-2.elasticbeanstalk.com" : "http://localhost:3001";
+  const apiURL = (process.env.NODE_ENV === "production") ? "https://dp1350a18qzst.cloudfront.net" : "http://localhost:3001";
 
   return (
     <AppContext.Provider value={apiURL}>
