@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { AppContext } from "../App";
+import { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import CreateHistory from "./CreateHistory";
 import Histories from "./Histories";
 import { motion } from "framer-motion";
 
 const RouteCustomer = () => {
+  const apiURL = useContext(AppContext);
+
   const { cId } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +18,7 @@ const RouteCustomer = () => {
 
   useEffect(() => {
     const getCustomerInfo = async () => {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/${cId}`, {
+      const res = await fetch(`${apiURL}/api/customers/${cId}`, {
         headers: { "x-auth-token": token }
       });
 
@@ -31,7 +34,7 @@ const RouteCustomer = () => {
     getCustomerInfo();
 
     const getHistories = async () => {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/customer/${cId}`, {
+      const res = await fetch(`${apiURL}/api/histories/customer/${cId}`, {
         headers: { "x-auth-token": token }
       });
 
@@ -44,7 +47,7 @@ const RouteCustomer = () => {
     }
 
     getHistories();
-  }, [cId, token]);
+  }, [cId, token, apiURL]);
 
   const createHistory = (history) => {
     setHistories([...histories, history]);

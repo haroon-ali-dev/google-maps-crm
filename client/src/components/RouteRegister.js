@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { AppContext } from "../App";
+import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Notification from "./Notification";
 
 const RouteRegister = () => {
+  const apiURL = useContext(AppContext);
+
   const [notification, setNotification] = useState({
     message: "",
     display: false,
@@ -15,7 +18,7 @@ const RouteRegister = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/register`, {
+      const res = await fetch(`${apiURL}/api/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })

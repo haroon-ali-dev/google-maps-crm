@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { AppContext } from "../App";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { motion, AnimatePresence } from "framer-motion";
 import Notification from "./Notification";
 
 const RouteHistoryUpdate = () => {
+  const apiURL = useContext(AppContext);
   const navigate = useNavigate();
 
   const [notification, setNotification] = useState({
@@ -20,7 +22,7 @@ const RouteHistoryUpdate = () => {
 
   useEffect(() => {
     const getHistory = async () => {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/${hId}`, {
+      const res = await fetch(`${apiURL}/api/histories/${hId}`, {
         headers: { "x-auth-token": token }
       });
 
@@ -35,7 +37,7 @@ const RouteHistoryUpdate = () => {
     }
 
     getHistory();
-  }, [hId, token]);
+  }, [hId, token, apiURL]);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -45,7 +47,7 @@ const RouteHistoryUpdate = () => {
     }
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/${hId}`, {
+      const res = await fetch(`${apiURL}/api/histories/${hId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ date, info })

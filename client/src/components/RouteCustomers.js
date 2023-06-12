@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { AppContext } from "../App";
+import { useEffect, useState, useContext } from "react";
 import CreateCustomer from "./CreateCustomer";
 import Customers from "./Customers";
 import jwt from "jwt-decode";
 import { motion } from "framer-motion";
 
 const RouteCustomers = () => {
+  const apiURL = useContext(AppContext);
+
   const [customers, setCustomers] = useState([]);
 
   const token = localStorage.getItem("token");
@@ -12,7 +15,7 @@ const RouteCustomers = () => {
 
   useEffect(() => {
     const getCustomers = async () => {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/user/${uId}`, {
+      const res = await fetch(`${apiURL}/api/customers/user/${uId}`, {
         headers: { "x-auth-token": token }
       });
       const data = await res.json();
@@ -25,7 +28,7 @@ const RouteCustomers = () => {
     }
 
     getCustomers();
-  }, [token, uId]);
+  }, [token, uId, apiURL]);
 
   const createCustomer = (customer) => {
     setCustomers([...customers, customer]);

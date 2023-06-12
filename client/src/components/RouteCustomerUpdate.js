@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { AppContext } from "../App";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import jwt from "jwt-decode";
 import { motion, AnimatePresence } from "framer-motion";
 import Notification from "./Notification";
 
 const RouteCustomerUpdate = () => {
+  const apiURL = useContext(AppContext);
   const navigate = useNavigate();
 
   const [notification, setNotification] = useState({
@@ -21,7 +23,7 @@ const RouteCustomerUpdate = () => {
 
   useEffect(() => {
     const getCustomerInfo = async () => {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/${cId}`, {
+      const res = await fetch(`${apiURL}/api/customers/${cId}`, {
         headers: { "x-auth-token": token }
       });
 
@@ -35,7 +37,7 @@ const RouteCustomerUpdate = () => {
     }
 
     getCustomerInfo();
-  }, [cId, token]);
+  }, [cId, token, apiURL]);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -45,7 +47,7 @@ const RouteCustomerUpdate = () => {
     }
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers/${cId}`, {
+      const res = await fetch(`${apiURL}/api/customers/${cId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ userId: uId, name, email })

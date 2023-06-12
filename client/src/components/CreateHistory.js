@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { AppContext } from "../App";
+import { useState, useContext } from "react";
 import moment from "moment";
 import { motion, AnimatePresence } from "framer-motion";
 import Notification from "./Notification";
 
 const CreateHistory = ({ cId, createHistory }) => {
+  const apiURL = useContext(AppContext);
+
   const [notification, setNotification] = useState({
     message: "",
     display: false,
@@ -22,7 +25,7 @@ const CreateHistory = ({ cId, createHistory }) => {
     }
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/histories/${cId}`, {
+      const res = await fetch(`${apiURL}/api/histories/${cId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ customerId: cId, date, info })

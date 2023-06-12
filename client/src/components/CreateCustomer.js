@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { AppContext } from "../App";
+import { useState, useContext } from "react";
 import jwt from "jwt-decode";
 import { motion, AnimatePresence } from "framer-motion";
 import Notification from "./Notification";
 
 const CreateCustomer = ({ createCustomer }) => {
+  const apiURL = useContext(AppContext);
+
   const [notification, setNotification] = useState({
     message: "",
     display: false,
@@ -23,7 +26,7 @@ const CreateCustomer = ({ createCustomer }) => {
     }
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/customers`, {
+      const res = await fetch(`${apiURL}/api/customers`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
         body: JSON.stringify({ userId: uId, name, email })
