@@ -1,41 +1,26 @@
-# Simple Customer Relationship Manager
+# Portfolio Website
+A simple CRM that businesses can use to keep track of their customers and business-customer correspondence.
 
-<img src="./screenshot.png" alt="screenshot" title="screenshot">
+## Screenshots
+![App Screenshot](https://res.cloudinary.com/dembzfkgg/image/upload/v1687179035/crm_screenshot_1ad3b248cd.png)
 
-## A full-stack project built using HTML, CSS, JavaScript, React, Node.js and MongoDB.
+## Tech Stack
+HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions
 
-## How To Run Locally
+## Features
+- Register and login users.
+- Create customers for each user.
+- View and edit customer information.
+- View and edit customer history (business correspondence).
 
-### Setup back-end
+## Utilization
+- Fully responsive.
+- Authentication with JWT.
+- Animations using Framer Motion.
+- Node.js server deployed to AWS using AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront and GitHub Actions.
+- MongoDB database deployed to MongoDB Atlas.
 
-In /api/ run:
-
-```bash
-npm i
-```
-
-Then run a mongodb server (with no username/password) at:
-
-```bash
-"mongodb://localhost:27017/crm"
-```
-
-Then in /api/ start node server:
-
-```bash
-npm start
-```
-
-### Setup front-end
-
-In /client/ run:
-
-```bash
-npm i
-```
-
-Then start react server:
-
-```bash
-npm start
-```
+## Deployment
+- Next.js front end deployed to Netlify.
+- Node.js server deployed to AWS.
+- MongoDB database deployed to MongoDB Atlas.
