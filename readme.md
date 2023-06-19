@@ -21,6 +21,6 @@ HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC
 - MongoDB database deployed to MongoDB Atlas.
 
 ## Deployment
-- Next.js front end deployed to Netlify.
+- React.js front end deployed to Netlify.
 - Node.js server deployed to AWS.
 - MongoDB database deployed to MongoDB Atlas.
