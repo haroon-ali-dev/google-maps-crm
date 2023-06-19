@@ -1,4 +1,4 @@
-# Portfolio Website
+# Simple Customer Relationship Manager
 A simple CRM that businesses can use to keep track of their customers and business-customer correspondence.
 
 ## Screenshots
