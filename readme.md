@@ -24,3 +24,6 @@ HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC
 - React.js front end deployed to Netlify.
 - Node.js server deployed to AWS.
 - MongoDB database deployed to MongoDB Atlas.
+
+## Deployment Links
+- Deployed Front End: https://simple-crm-dev.netlify.app/
