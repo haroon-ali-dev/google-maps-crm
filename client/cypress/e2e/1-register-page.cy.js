@@ -26,7 +26,8 @@ describe('Form validation', () => {
     longEmail += Cypress._.repeat('l', 250);
     longEmail += '@gmail.com';
 
-    cy.get('#email').type(longEmail);
+    cy.get('#email').invoke('val',longEmail);
+    cy.get('#email').type('l');
     cy.get('#btn-add').click();
     cy.contains('Email must be at most 256 characters').should('exist');
   })
