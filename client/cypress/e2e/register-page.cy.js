@@ -49,3 +49,16 @@ describe('Form validation', () => {
     cy.contains('Password must be at most 15 characters').should('exist');
   })
 })
+
+describe('User registration', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000');
+  });
+
+  it('Registers user', () => {
+    cy.get('#email').type('haroon@gmail.com');
+    cy.get('#password').type('password321');
+    cy.get('#btn-add').click();
+    cy.contains('User registered.').should('exist');
+  })
+})
