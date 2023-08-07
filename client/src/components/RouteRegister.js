@@ -1,6 +1,10 @@
 import { AppContext } from "../App";
 import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 import Notification from "./Notification";
 
 const RouteRegister = () => {
