@@ -7,6 +7,11 @@ import * as yup from "yup";
 
 import Notification from "./Notification";
 
+const schema = yup.object({
+  email: yup.string().max(256).email().required().label("Email"),
+  password: yup.string().min(3).max(15).required().label("Password")
+}).required();
+
 const RouteRegister = () => {
   const apiURL = useContext(AppContext);
 
@@ -15,24 +20,29 @@ const RouteRegister = () => {
     display: false,
     bgColor: ""
   });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const submit = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema)
+  });
 
+  const onSubmit = async (formData) => {
     try {
       const res = await fetch(`${apiURL}/api/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify(formData)
       });
 
       const data = await res.json();
 
       if (res.status === 200) {
-        setEmail("");
-        setPassword("");
+        setValue("email", "");
+        setValue("password", "");
         setNotification({
           message: data.message,
           display: true,
@@ -69,7 +79,7 @@ const RouteRegister = () => {
       transition={{ ease: "easeOut", duration: 1.5 }}
     >
       <div className="cont">
-        <form onSubmit={submit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-input-container">
             <label>
               Email
@@ -77,15 +87,14 @@ const RouteRegister = () => {
               <input
                 id="email"
                 type="text"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); }}
-                minLength="3"
-                maxLength="256"
-                required />
+                {...register("email")}
+              />
             </label>
-            <div className='cont-invalid'>
-              <span className='invalid-text'></span>
-            </div>
+            {errors.email?.message && (
+              <div className='cont-invalid'>
+                <span className='invalid-text'>{errors.email?.message}</span>
+              </div>
+            )}
           </div>
           <div className="form-input-container">
             <label>
@@ -94,15 +103,14 @@ const RouteRegister = () => {
               <input
                 id="password"
                 type="password"
-                value={password}
-                onChange={(e) => { setPassword(e.target.value); }}
-                minLength="3"
-                maxLength="15"
-                required />
+                {...register("password")}
+              />
             </label>
-            <div className='cont-invalid'>
-              <span className='invalid-text'></span>
-            </div>
+            {errors.password?.message && (
+              <div className='cont-invalid'>
+                <span className='invalid-text'>{errors.password?.message}</span>
+              </div>
+            )}
           </div>
           <div className="form-submit-container">
             <button className="btn btn-add" id="btn-add" type="submit">Register</button>
