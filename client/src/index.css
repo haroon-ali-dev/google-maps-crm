@@ -197,7 +197,7 @@ textarea {
 
 @media (min-width: 576px) {
   .cont {
-    width: 60%;
+    width: 50%;
   }
 
   .cont-cust-page {
@@ -207,9 +207,7 @@ textarea {
   ul {
     width: 60%;
   }
-}
 
-@media (min-width: 576px) {
   .cus-email {
     font-size: 14px;
   }
@@ -217,7 +215,7 @@ textarea {
 
 @media (min-width: 992px) {
   .cont {
-    width: 25%;
+    width: 30%;
   }
 
   .cont-cust-page {
@@ -228,5 +226,9 @@ textarea {
 @media (min-width: 1400px) {
   ul {
     width: 50%;
+  }
+
+  .cont {
+    width: 25%;
   }
 }
