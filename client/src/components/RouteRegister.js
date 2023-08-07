@@ -83,6 +83,9 @@ const RouteRegister = () => {
                 maxLength="256"
                 required />
             </label>
+            <div className='cont-invalid'>
+              <span className='invalid-text'></span>
+            </div>
           </div>
           <div className="form-input-container">
             <label>
@@ -97,6 +100,9 @@ const RouteRegister = () => {
                 maxLength="15"
                 required />
             </label>
+            <div className='cont-invalid'>
+              <span className='invalid-text'></span>
+            </div>
           </div>
           <div className="form-submit-container">
             <button className="btn btn-add" id="btn-add" type="submit">Register</button>

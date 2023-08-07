@@ -70,6 +70,7 @@ a {
 .heading {
   text-align: center;
   margin-top: 100px;
+  font-weight: 300;
 }
 
 .cont {
@@ -107,6 +108,17 @@ input {
 
 label {
   margin-left: 10px;
+}
+
+.cont-invalid {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.invalid-text {
+  color: #E2412E;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 ul {
