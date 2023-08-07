@@ -49,3 +49,23 @@ describe('Form validation', () => {
     cy.contains('Password must be at most 15 characters').should('exist');
   })
 })
+
+describe('User login', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/login');
+  });
+
+  it('Wrong password or email', () => {
+    cy.get('#email').type('haroon@gmail.co');
+    cy.get('#password').type('password321');
+    cy.get('#btn-add').click();
+    cy.contains('Invalid email or password.').should('exist');
+  })
+
+  it('Successful login', () => {
+    cy.get('#email').type('haroon@gmail.com');
+    cy.get('#password').type('password321');
+    cy.get('#btn-add').click();
+    cy.contains('Logout').should('exist');
+  })
+})
