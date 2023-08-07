@@ -2,7 +2,16 @@ import { AppContext } from "../App";
 import { useState, useContext } from "react";
 import jwt from "jwt-decode";
 import { motion, AnimatePresence } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 import Notification from "./Notification";
+
+const schema = yup.object({
+  name: yup.string().min(3).max(300).required().label("Name"),
+  email: yup.string().max(256).email().required().label("Email"),
+}).required();
 
 const CreateCustomer = ({ createCustomer }) => {
   const apiURL = useContext(AppContext);
@@ -12,24 +21,24 @@ const CreateCustomer = ({ createCustomer }) => {
     display: false,
     bgColor: ""
   });
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema)
+  });
 
   const token = localStorage.getItem("token");
   const { uId } = jwt(token);
 
-  const submit = async (e) => {
-    e.preventDefault();
-
-    if (!name || !email) {
-      return alert("Please enter name and email.");
-    }
-
+  const onSubmit = async (formData) => {
     try {
       const res = await fetch(`${apiURL}/api/customers`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ userId: uId, name, email })
+        body: JSON.stringify({ userId: uId, ...formData })
       });
 
       const data = await res.json();
@@ -62,20 +71,38 @@ const CreateCustomer = ({ createCustomer }) => {
 
   return (
     <div>
-      <form onSubmit={submit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-input-container">
           <label>
             Name
             <br />
-            <input id="name" type="text" value={name} onChange={(e) => { setName(e.target.value); }} min="3" max="50" required />
+            <input
+              id="name"
+              type="text"
+              {...register("name")}
+            />
           </label>
+          {errors.name?.message && (
+            <div className='cont-invalid'>
+              <span className='invalid-text'>{errors.name?.message}</span>
+            </div>
+          )}
         </div>
         <div className="form-input-container">
           <label>
             Email
             <br />
-            <input id="email" type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} min="3" max="256" required />
+            <input
+              id="email"
+              type="text"
+              {...register("email")}
+            />
           </label>
+          {errors.email?.message && (
+            <div className='cont-invalid'>
+              <span className='invalid-text'>{errors.email?.message}</span>
+            </div>
+          )}
         </div>
         <div className="form-submit-container">
           <button className="btn btn-add" id="btn-add" type="submit">Add</button>
