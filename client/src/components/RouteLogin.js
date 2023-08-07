@@ -2,7 +2,16 @@ import { AppContext } from "../App";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion"
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 import Notification from "./Notification";
+
+const schema = yup.object({
+    email: yup.string().max(256).email().required().label("Email"),
+    password: yup.string().min(3).max(15).required().label("Password")
+}).required();
 
 const RouteLogin = () => {
     const apiURL = useContext(AppContext);
@@ -14,17 +23,21 @@ const RouteLogin = () => {
         display: false,
         bgColor: ""
     });
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    const submit = async (e) => {
-        e.preventDefault();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema)
+    });
 
+    const onSubmit = async (formData) => {
         try {
             const res = await fetch(`${apiURL}/api/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify(formData)
             });
 
             const data = await res.json();
@@ -64,7 +77,7 @@ const RouteLogin = () => {
             transition={{ ease: "easeOut", duration: 1.5 }}
         >
             <div className="cont">
-                <form onSubmit={submit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-input-container">
                         <label>
                             Email
@@ -72,12 +85,14 @@ const RouteLogin = () => {
                             <input
                                 id="email"
                                 type="text"
-                                value={email}
-                                onChange={(e) => { setEmail(e.target.value); }}
-                                minLength="3"
-                                maxLength="256"
-                                required />
+                                {...register("email")}
+                            />
                         </label>
+                        {errors.email?.message && (
+                            <div className='cont-invalid'>
+                                <span className='invalid-text'>{errors.email?.message}</span>
+                            </div>
+                        )}
                     </div>
                     <div className="form-input-container">
                         <label>
@@ -86,12 +101,14 @@ const RouteLogin = () => {
                             <input
                                 id="password"
                                 type="password"
-                                value={password}
-                                onChange={(e) => { setPassword(e.target.value); }}
-                                minLength="3"
-                                maxLength="15"
-                                required />
+                                {...register("password")}
+                            />
                         </label>
+                        {errors.password?.message && (
+                            <div className='cont-invalid'>
+                                <span className='invalid-text'>{errors.password?.message}</span>
+                            </div>
+                        )}
                     </div>
                     <div className="form-submit-container">
                         <button className="btn btn-add" id="btn-add" type="submit">Login</button>
