@@ -25,6 +25,7 @@ const CreateCustomer = ({ createCustomer }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema)
@@ -45,6 +46,8 @@ const CreateCustomer = ({ createCustomer }) => {
 
       if (res.status === 200) {
         createCustomer(data.customer);
+        setValue("name", "");
+        setValue("email", "");
       } else {
         setNotification({
           message: data.message,

@@ -56,9 +56,23 @@ describe('Form validation', () => {
     longEmail += Cypress._.repeat('l', 250);
     longEmail += '@gmail.com';
 
-    cy.get('#email').invoke('val',longEmail);
+    cy.get('#email').invoke('val', longEmail);
     cy.get('#email').type('l');
     cy.get('#btn-add').click();
     cy.contains('Email must be at most 256 characters').should('exist');
+  })
+})
+
+describe('Creating customers', () => {
+  beforeEach(() => {
+    login();
+    cy.visit('http://localhost:3000/customers');
+  });
+
+  it('Creates a customer', () => {
+    cy.get('#name').type('Gary Smith');
+    cy.get('#email').type('gary@gmail.com');
+    cy.get('#btn-add').click();
+    cy.contains('gary@gmail.com').should('exist');
   })
 })
