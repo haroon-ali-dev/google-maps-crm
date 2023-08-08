@@ -54,6 +54,7 @@ describe('Form validation', () => {
 
 describe('User registration', () => {
   beforeEach(() => {
+    cy.task('seedDB');
     cy.visit('http://localhost:3000');
   });
 
@@ -65,7 +66,7 @@ describe('User registration', () => {
   })
 
   it('Stops user duplication', () => {
-    cy.get('#email').type('haroon2@gmail.com');
+    cy.get('#email').type('haroon@gmail.com');
     cy.get('#password').type('password321');
     cy.get('#btn-add').click();
     cy.contains('User already registered.').should('exist');

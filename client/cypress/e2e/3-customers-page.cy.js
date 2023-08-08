@@ -10,6 +10,7 @@ const login = () => {
 
 describe('Form validation', () => {
   beforeEach(() => {
+    cy.task('seedDB');
     login();
     cy.visit('http://localhost:3000/customers');
   });
@@ -65,14 +66,15 @@ describe('Form validation', () => {
 
 describe('Creating customers', () => {
   beforeEach(() => {
+    cy.task('seedDB');
     login();
     cy.visit('http://localhost:3000/customers');
   });
 
   it('Creates a customer', () => {
-    cy.get('#name').type('Gary Smith');
-    cy.get('#email').type('gary@gmail.com');
+    cy.get('#name').type('Samantha Bishop');
+    cy.get('#email').type('samantha@gmail.com');
     cy.get('#btn-add').click();
-    cy.contains('gary@gmail.com').should('exist');
+    cy.contains('samantha@gmail.com').should('exist');
   })
 })

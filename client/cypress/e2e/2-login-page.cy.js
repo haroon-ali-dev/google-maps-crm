@@ -54,6 +54,7 @@ describe('Form validation', () => {
 
 describe('User login', () => {
   beforeEach(() => {
+    cy.task('seedDB');
     cy.visit('http://localhost:3000/login');
   });
 
