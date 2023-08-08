@@ -1,5 +1,6 @@
 describe('Form validation', () => {
   beforeEach(() => {
+    cy.task('seedDB');
     cy.visit('http://localhost:3000');
   });
 
