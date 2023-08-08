@@ -58,14 +58,14 @@ describe('User registration', () => {
   });
 
   it('Registers user', () => {
-    cy.get('#email').type('haroon@gmail.com');
+    cy.get('#email').type('haroon2@gmail.com');
     cy.get('#password').type('password321');
     cy.get('#btn-add').click();
     cy.contains('User registered.').should('exist');
   })
 
   it('Stops user duplication', () => {
-    cy.get('#email').type('haroon@gmail.com');
+    cy.get('#email').type('haroon2@gmail.com');
     cy.get('#password').type('password321');
     cy.get('#btn-add').click();
     cy.contains('User already registered.').should('exist');

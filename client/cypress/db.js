@@ -64,8 +64,14 @@ async function seed() {
     await Customer.deleteMany({});
     await History.deleteMany({});
 
-    const user = new User({ email: "haroon2@gmail.com", password: "password321" });
+    const user = new User({ email: "haroon@gmail.com", password: "password321" });
     await user.save();
+
+    const customer = new Customer({ userId: user._id, name: "Gary Smith", email: "gary@gmail.com" });
+    await customer.save();
+
+    const history = new History({ customerId: customer._id, date: "2023-08-03", info: "Created account." });
+    await history.save();
 }
 
 module.exports.seed = seed;
