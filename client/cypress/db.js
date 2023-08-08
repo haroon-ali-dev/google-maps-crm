@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -64,7 +65,9 @@ async function seed() {
     await Customer.deleteMany({});
     await History.deleteMany({});
 
-    const user = new User({ email: "haroon@gmail.com", password: "password321" });
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash("password321", salt);
+    const user = new User({ email: "haroon@gmail.com", password });
     await user.save();
 
     const customer = new Customer({ userId: user._id, name: "Gary Smith", email: "gary@gmail.com" });
