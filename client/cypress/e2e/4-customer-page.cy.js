@@ -20,3 +20,16 @@ describe('Display customer information', () => {
     cy.contains('Gary Smith').should('exist');
   })
 })
+
+// describe('Updates customer information', () => {
+//   beforeEach(() => {
+//     cy.task('seedDB');
+//     login();
+//     cy.visit('http://localhost:3000/customers');
+//     cy.contains('View').click();
+//   });
+
+//   it('Correctly updates customer information', () => {
+//     cy.contains('Gary Smith').should('exist');
+//   })
+// })

@@ -63,7 +63,7 @@ const RouteHistoryUpdate = () => {
     }
 
     getHistory();
-  }, [hId, token, apiURL]);
+  }, [hId, token, apiURL, setValue]);
 
   const onSubmit = async (formData) => {
     formData.date = moment(formData.date).utcOffset("+0100").format("YYYY-MM-DD");

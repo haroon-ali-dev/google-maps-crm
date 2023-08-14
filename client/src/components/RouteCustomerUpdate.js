@@ -52,7 +52,7 @@ const RouteCustomerUpdate = () => {
     }
 
     getCustomerInfo();
-  }, [cId, token, apiURL]);
+  }, [cId, token, apiURL, setValue]);
 
   const onSubmit = async (formData) => {
     try {
