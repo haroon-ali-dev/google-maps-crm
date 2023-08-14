@@ -105,3 +105,26 @@ describe('Updates customer information', () => {
     cy.contains('Bob Smith').should('exist');
   })
 })
+
+describe('History', () => {
+  beforeEach(() => {
+    cy.task('seedDB');
+    login();
+    cy.visit('http://localhost:3000/customers');
+    cy.contains('View').click();
+  });
+
+  it('Creates customer history', () => {
+    cy.get('#date').type('2022-08-14');
+    cy.get('#info').type('Created another account.');
+    cy.contains('Add').click();
+    cy.contains('14-08-2022').should('exist');
+  })
+
+  it('Updates customer history', () => {
+    cy.get('.btn-view').click();
+    cy.get('#date').type('2022-08-14');
+    cy.contains('Update').click();
+    cy.contains('14-08-2022').should('exist');
+  })
+})
