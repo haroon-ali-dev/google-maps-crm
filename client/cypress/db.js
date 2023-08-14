@@ -61,14 +61,11 @@ const History = mongoose.model("History", historySchema);
 async function seed() {
     await mongoose.connect("mongodb://127.0.0.1:27017/crm");
 
-    await User.deleteMany({});
+    await User.deleteMany({ email: { $ne: "haroon@gmail.com" } });
     await Customer.deleteMany({});
     await History.deleteMany({});
 
-    const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash("password321", salt);
-    const user = new User({ email: "haroon@gmail.com", password });
-    await user.save();
+    const user = await User.findOne({ email: "haroon@gmail.com" });
 
     const customer = new Customer({ userId: user._id, name: "Gary Smith", email: "gary@gmail.com" });
     await customer.save();
