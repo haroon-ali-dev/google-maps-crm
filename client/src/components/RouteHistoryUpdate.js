@@ -3,7 +3,27 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { motion, AnimatePresence } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { parse, isDate } from "date-fns";
+
 import Notification from "./Notification";
+
+const today = new Date();
+
+function parseDateString(value, originalValue) {
+  const parsedDate = isDate(originalValue)
+    ? originalValue
+    : parse(originalValue, "yyyy-MM-dd", new Date());
+
+  return parsedDate;
+}
+
+const schema = yup.object({
+  date: yup.date().transform(parseDateString).max(today).label("Date"),
+  info: yup.string().max(1000).label("Info")
+}).required();
 
 const RouteHistoryUpdate = () => {
   const apiURL = useContext(AppContext);
@@ -15,8 +35,14 @@ const RouteHistoryUpdate = () => {
     bgColor: ""
   });
   const { hId } = useParams();
-  const [date, setDate] = useState("2022-05-05");
-  const [info, setInfo] = useState("");
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema)
+  });
 
   const token = localStorage.getItem("token");
 
@@ -29,8 +55,8 @@ const RouteHistoryUpdate = () => {
       const data = await res.json();
 
       if (data.message === "success") {
-        setDate(moment(data.history.date).format('YYYY-MM-DD'));
-        setInfo(data.history.info);
+        setValue("date", moment(data.history.date).format('YYYY-MM-DD'));
+        setValue("info", data.history.info);
       } else {
         alert(data.message);
       }
@@ -39,18 +65,14 @@ const RouteHistoryUpdate = () => {
     getHistory();
   }, [hId, token, apiURL]);
 
-  const submit = async (e) => {
-    e.preventDefault();
-
-    if (!date || !info) {
-      return alert("Please enter date and info");
-    }
+  const onSubmit = async (formData) => {
+    formData.date = moment(formData.date).utcOffset("+0100").format("YYYY-MM-DD");
 
     try {
       const res = await fetch(`${apiURL}/api/histories/${hId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ date, info })
+        body: JSON.stringify(formData)
       });
 
       const data = await res.json();
@@ -87,19 +109,34 @@ const RouteHistoryUpdate = () => {
       transition={{ ease: "easeOut", duration: 1.5 }}
     >
       <div className="cont">
-        <form onSubmit={submit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>
               Date
               <br />
-              <input id="date" type="date" value={date} onChange={(e) => { setDate(moment(e.target.value).format('YYYY-MM-DD')); }} required />
+              <input
+                id="date"
+                type="date"
+                {...register("date")}
+              />
             </label>
+            {errors.date?.message && (
+              <div className='cont-invalid'>
+                <span className='invalid-text'>{errors.date?.message}</span>
+              </div>
+            )}
           </div>
           <div>
             <label>
               Info
               <br />
-              <textarea id="info" cols="30" rows="10" value={info} onChange={(e) => { setInfo(e.target.value); }} required></textarea>
+              <textarea
+                id="info"
+                cols="30"
+                rows="10"
+                {...register("info")}
+              >
+              </textarea>
             </label>
           </div>
           <div>
