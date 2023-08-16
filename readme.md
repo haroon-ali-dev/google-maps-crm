@@ -5,7 +5,10 @@ A simple CRM that businesses can use to keep track of their customers and busine
 ![App Screenshot](https://res.cloudinary.com/dembzfkgg/image/upload/v1687179035/crm_screenshot_1ad3b248cd.png)
 
 ## Tech Stack
-HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions
+HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions.
+
+## Automated Tests
+- End-to-End tests with Cypress.
 
 ## Features
 - Register and login users.
