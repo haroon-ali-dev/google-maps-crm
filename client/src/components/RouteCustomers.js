@@ -43,8 +43,8 @@ const RouteCustomers = () => {
       <div>
         <div className="cont">
           <CreateCustomer createCustomer={createCustomer} />
-          <Customers customers={customers} />
         </div>
+        <Customers customers={customers} />
       </div>
     </motion.div>
   );
