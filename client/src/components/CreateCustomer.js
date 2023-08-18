@@ -11,6 +11,7 @@ import Notification from "./Notification";
 const schema = yup.object({
   name: yup.string().min(3).max(300).required().label("Name"),
   email: yup.string().max(256).email().required().label("Email"),
+  postCode: yup.string().min(3).max(10).required().label("Post Code"),
 }).required();
 
 const CreateCustomer = ({ createCustomer }) => {
@@ -104,6 +105,22 @@ const CreateCustomer = ({ createCustomer }) => {
           {errors.email?.message && (
             <div className='cont-invalid'>
               <span className='invalid-text'>{errors.email?.message}</span>
+            </div>
+          )}
+        </div>
+        <div className="form-input-container">
+          <label>
+            Post Code
+            <br />
+            <input
+              id="postCode"
+              type="text"
+              {...register("postCode")}
+            />
+          </label>
+          {errors.postCode?.message && (
+            <div className='cont-invalid'>
+              <span className='invalid-text'>{errors.postCode?.message}</span>
             </div>
           )}
         </div>
