@@ -34,21 +34,35 @@ const RouteCustomers = () => {
 
       await loader.importLibrary('core');
 
-      window.myMap = new window.google.maps.Map(document.getElementById('map'), {
-        center: { lat: 53.4786033, lng: -2.2429839 },
-        zoom: 13
-      });
-
       window.geocoder = new window.google.maps.Geocoder();
+      window.infowindow = new window.google.maps.InfoWindow();
+
+      window.myMap = new window.google.maps.Map(document.getElementById('map'), {
+        center: { lat: 53.4733352, lng: -2.2600077 },
+        zoom: 10
+      });
 
       for (let customer of customers) {
         window.geocoder.geocode({ 'address': customer.postCode }, function (results, status) {
           if (status === 'OK') {
             window.myMap.setCenter(results[0].geometry.location);
 
-            new window.google.maps.Marker({
+            const marker = new window.google.maps.Marker({
               map: window.myMap,
               position: results[0].geometry.location
+            });
+
+            window.google.maps.event.addListener(marker, 'click', function () {
+              window.infowindow.setContent(`
+                <div style='color:black;'>
+                  <strong>${customer.name}</strong>
+                  <br/>
+                  ${customer.email}
+                  <br/>
+                  ${customer.postCode}
+                </div>
+              `);
+              window.infowindow.open(window.myMap, this);
             });
           }
         });
@@ -63,9 +77,22 @@ const RouteCustomers = () => {
       if (status === 'OK') {
         window.myMap.setCenter(results[0].geometry.location);
 
-        new window.google.maps.Marker({
+        const marker = new window.google.maps.Marker({
           map: window.myMap,
           position: results[0].geometry.location
+        });
+
+        window.google.maps.event.addListener(marker, 'click', function () {
+          window.infowindow.setContent(`
+            <div style='color:black;'>
+              <strong>${customer.name}</strong>
+              <br/>
+              ${customer.email}
+              <br/>
+              ${customer.postCode}
+            </div>
+          `);
+          window.infowindow.open(window.myMap, this);
         });
       }
     });
