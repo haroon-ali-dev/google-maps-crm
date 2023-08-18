@@ -136,17 +136,6 @@ li {
   margin-bottom: 10px;
 }
 
-.cus-name {
-  font-size: 20px;
-  color: white;
-}
-
-.cus-email {
-  margin-bottom: 20px;
-  font-size: 13px;
-  color: white;
-}
-
 .form-create-history {
   margin: 30px 0px 0px 0px;
   grid-template-columns: 80%;
@@ -206,10 +195,6 @@ textarea {
 
   ul {
     width: 60%;
-  }
-
-  .cus-email {
-    font-size: 14px;
   }
 }
 
