@@ -3,6 +3,7 @@ A simple CRM that businesses can use to keep track of their customers and busine
 
 ## Video
 https://res.cloudinary.com/dembzfkgg/video/upload/v1687179064/CRM_bac821e46f
+![App Screenshot](https://res.cloudinary.com/dembzfkgg/video/upload/v1687179064/CRM_bac821e46f.mp4)
 
 ## Screenshots
 ![App Screenshot](https://res.cloudinary.com/dembzfkgg/image/upload/v1687179035/crm_screenshot_1ad3b248cd.png)
