@@ -60,6 +60,7 @@ const RouteCustomers = () => {
                   ${customer.email}
                   <br/>
                   ${customer.postCode}
+                  <br/>
                   <a href='/customer/${customer._id}'>View Details</a>
                 </div>
               `);
