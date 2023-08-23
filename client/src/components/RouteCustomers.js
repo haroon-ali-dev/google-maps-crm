@@ -43,7 +43,7 @@ const RouteCustomers = () => {
       });
 
       for (let customer of customers) {
-        window.geocoder.geocode({ 'address': customer.postCode }, function (results, status) {
+        window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
           if (status === 'OK') {
             window.myMap.setCenter(results[0].geometry.location);
 
@@ -59,7 +59,7 @@ const RouteCustomers = () => {
                   <br/>
                   ${customer.email}
                   <br/>
-                  ${customer.postCode}
+                  ${customer.postcode}
                   <br/>
                   <a href='/customer/${customer._id}'>View Details</a>
                 </div>
@@ -76,7 +76,7 @@ const RouteCustomers = () => {
   }, [apiURL, token, uId]);
 
   const createCustomer = (customer) => {
-    window.geocoder.geocode({ 'address': customer.postCode }, function (results, status) {
+    window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
       if (status === 'OK') {
         window.myMap.setCenter(results[0].geometry.location);
 
@@ -85,6 +85,18 @@ const RouteCustomers = () => {
           position: results[0].geometry.location
         });
 
+        window.infowindow.setContent(`
+            <div style='color:black;'>
+              <strong>${customer.name}</strong>
+              <br/>
+              ${customer.email}
+              <br/>
+              ${customer.postcode}
+            </div>
+          `);
+
+          window.infowindow.open(window.myMap, marker);
+
         window.google.maps.event.addListener(marker, 'click', function () {
           window.infowindow.setContent(`
             <div style='color:black;'>
@@ -92,7 +104,7 @@ const RouteCustomers = () => {
               <br/>
               ${customer.email}
               <br/>
-              ${customer.postCode}
+              ${customer.postcode}
             </div>
           `);
 

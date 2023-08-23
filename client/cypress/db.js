@@ -34,6 +34,12 @@ const customerSchema = new mongoose.Schema({
         required: true,
         minLength: 3,
         maxLength: 256
+    },
+    postcode: {
+        type: String,
+        required: true,
+        minLength: 3,
+        maxLength: 10
     }
 });
 
@@ -67,7 +73,7 @@ async function seed() {
 
     const user = await User.findOne({ email: "haroon@gmail.com" });
 
-    const customer = new Customer({ userId: user._id, name: "Gary Smith", email: "gary@gmail.com" });
+    const customer = new Customer({ userId: user._id, name: "Gary Smith", email: "gary@gmail.com", postcode: "M14 7DX" });
     await customer.save();
 
     const history = new History({ customerId: customer._id, date: "2023-08-03", info: "Created account." });

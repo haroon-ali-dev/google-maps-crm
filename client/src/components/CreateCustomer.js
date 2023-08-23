@@ -11,7 +11,7 @@ import Notification from "./Notification";
 const schema = yup.object({
   name: yup.string().min(3).max(300).required().label("Name"),
   email: yup.string().max(256).email().required().label("Email"),
-  postCode: yup.string().min(3).max(10).matches(/^M.*/, 'Postcode must start with the character M').required().label("Postcode"),
+  postcode: yup.string().min(3).max(10).matches(/^M.*/, 'Postcode must start with the character M').required().label("Postcode"),
 }).required();
 
 const CreateCustomer = ({ createCustomer }) => {
@@ -36,7 +36,7 @@ const CreateCustomer = ({ createCustomer }) => {
   const { uId } = jwt(token);
 
   const onSubmit = async (formData) => {
-    window.geocoder.geocode({ 'address': formData.postCode }, async function (results, status) {
+    window.geocoder.geocode({ 'address': formData.postcode }, async function (results, status) {
       if (status !== 'OK') {
         setNotification({
           message: 'Postcode is not valid',
@@ -65,7 +65,7 @@ const CreateCustomer = ({ createCustomer }) => {
             createCustomer(data.customer);
             setValue("name", "");
             setValue("email", "");
-            setValue("postCode", "");
+            setValue("postcode", "");
           } else {
             setNotification({
               message: data.message,
@@ -132,14 +132,14 @@ const CreateCustomer = ({ createCustomer }) => {
             Postcode
             <br />
             <input
-              id="postCode"
+              id="postcode"
               type="text"
-              {...register("postCode")}
+              {...register("postcode")}
             />
           </label>
-          {errors.postCode?.message && (
+          {errors.postcode?.message && (
             <div className='cont-invalid'>
-              <span className='invalid-text'>{errors.postCode?.message}</span>
+              <span className='invalid-text'>{errors.postcode?.message}</span>
             </div>
           )}
         </div>
