@@ -36,41 +36,60 @@ const CreateCustomer = ({ createCustomer }) => {
   const { uId } = jwt(token);
 
   const onSubmit = async (formData) => {
-    try {
-      const res = await fetch(`${apiURL}/api/customers`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ userId: uId, ...formData })
-      });
-
-      const data = await res.json();
-
-      if (res.status === 200) {
-        createCustomer(data.customer);
-        setValue("name", "");
-        setValue("email", "");
-      } else {
+    window.geocoder.geocode({ 'address': formData.postCode }, async function (results, status) {
+      if (status !== 'OK') {
         setNotification({
-          message: data.message,
+          message: 'Postcode is not valid',
           display: true,
           bgColor: "#E2412E"
         });
+
+        setTimeout(() => {
+          setNotification({
+            message: "",
+            display: false,
+            bgColor: "#E2412E"
+          });
+        }, 3000);
+      } else {
+        try {
+          const res = await fetch(`${apiURL}/api/customers`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "x-auth-token": token },
+            body: JSON.stringify({ userId: uId, ...formData })
+          });
+
+          const data = await res.json();
+
+          if (res.status === 200) {
+            createCustomer(data.customer);
+            setValue("name", "");
+            setValue("email", "");
+            setValue("postCode", "");
+          } else {
+            setNotification({
+              message: data.message,
+              display: true,
+              bgColor: "#E2412E"
+            });
+          }
+        } catch (error) {
+          setNotification({
+            message: error.message,
+            display: true,
+            bgColor: "#E2412E"
+          });
+        } finally {
+          setTimeout(() => {
+            setNotification({
+              message: "",
+              display: false,
+              bgColor: "#E2412E"
+            });
+          }, 3000);
+        }
       }
-    } catch (error) {
-      setNotification({
-        message: error.message,
-        display: true,
-        bgColor: "#E2412E"
-      });
-    } finally {
-      setTimeout(() => {
-        setNotification({
-          message: "",
-          display: false,
-          bgColor: "#E2412E"
-        });
-      }, 3000);
-    }
+    });
   }
 
   return (
