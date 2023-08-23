@@ -1,5 +1,6 @@
 import { AppContext } from "../App";
 import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import jwt from "jwt-decode";
 import { motion } from "framer-motion";
 import { Loader } from '@googlemaps/js-api-loader';
@@ -7,6 +8,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import CreateCustomer from "./CreateCustomer";
 
 const RouteCustomers = () => {
+  const navigate = useNavigate();
   const apiURL = useContext(AppContext);
 
   const token = localStorage.getItem("token");
@@ -42,7 +44,7 @@ const RouteCustomers = () => {
         zoom: 10
       });
 
-      for (let customer of customers) {
+      customers.forEach((customer, index) => {
         window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
           if (status === 'OK') {
             window.myMap.setCenter(results[0].geometry.location);
@@ -61,19 +63,27 @@ const RouteCustomers = () => {
                   <br/>
                   ${customer.postcode}
                   <br/>
-                  <a href='/customer/${customer._id}'>View Details</a>
+                  <button class='btn btn-map' id='btn-map'>View Details</button>
                 </div>
               `);
 
               window.infowindow.open(window.myMap, this);
+
+              window.infowindow.addListener('domready', () => {
+                const btnMap = document.getElementById('btn-map');
+
+                btnMap.addEventListener('click', () => {
+                  navigate(`/customer/${customer._id}`);
+                });
+              });
             });
           }
         });
-      }
+      });
     }
 
     getCustomers();
-  }, [apiURL, token, uId]);
+  }, [apiURL, token, uId, navigate]);
 
   const createCustomer = (customer) => {
     window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
@@ -85,18 +95,6 @@ const RouteCustomers = () => {
           position: results[0].geometry.location
         });
 
-        window.infowindow.setContent(`
-            <div style='color:black;'>
-              <strong>${customer.name}</strong>
-              <br/>
-              ${customer.email}
-              <br/>
-              ${customer.postcode}
-            </div>
-          `);
-
-          window.infowindow.open(window.myMap, marker);
-
         window.google.maps.event.addListener(marker, 'click', function () {
           window.infowindow.setContent(`
             <div style='color:black;'>
@@ -105,10 +103,20 @@ const RouteCustomers = () => {
               ${customer.email}
               <br/>
               ${customer.postcode}
+              <br/>
+              <button class='btn btn-map' id='btn-map'>View Details</button>
             </div>
           `);
 
           window.infowindow.open(window.myMap, this);
+
+          window.infowindow.addListener('domready', () => {
+            const btnMap = document.getElementById('btn-map');
+
+            btnMap.addEventListener('click', () => {
+              navigate(`/customer/${customer._id}`);
+            });
+          });
         });
       }
     });
@@ -128,13 +136,15 @@ const RouteCustomers = () => {
       </motion.div>
 
       <motion.div
-      className='containerMap'
+        className='containerMap'
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
         <div id='map'></div>
+        <div style={{ backgroundColor: 'black', width: '20px', height: '20px' }}></div>
       </motion.div>
+      
     </div>
   );
 }
