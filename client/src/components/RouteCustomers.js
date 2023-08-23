@@ -110,7 +110,7 @@ const RouteCustomers = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
-        <div className="cont">
+        <div className="cont panel">
           <CreateCustomer createCustomer={createCustomer} />
         </div>
       </motion.div>

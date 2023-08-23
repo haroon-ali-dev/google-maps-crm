@@ -17,7 +17,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -63,7 +63,7 @@ a {
 }
 
 .btn-nav:hover {
-  background-color:#E2412E;
+  background-color: #E2412E;
   color: white;
 }
 
@@ -90,7 +90,6 @@ a {
 #map {
   width: 80%;
   height: 300px;
-  margin: 0 auto;
   border-radius: 20px;
 }
 
@@ -219,9 +218,41 @@ textarea {
   }
 }
 
+@media (min-width: 768px) {
+  .containerFormMap {
+    flex-direction: row;
+    margin-top: 50px;
+  }
+
+  .containerForm, .containerMap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .panel {
+    width: 80%;
+    margin: 0px;
+  }
+}
+
 @media (min-width: 992px) {
   .cont {
     width: 30%;
+  }
+
+  .panel {
+    width: 60%;
+  }
+
+  .containerForm {
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
+
+  .containerMap {
+    justify-content: flex-start;
+    margin-left: 20px;
   }
 
   .cont-cust-page {
@@ -236,5 +267,9 @@ textarea {
 
   .cont {
     width: 25%;
+  }
+
+  .panel {
+    width: 55%;
   }
 }
