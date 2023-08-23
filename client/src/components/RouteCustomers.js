@@ -103,8 +103,9 @@ const RouteCustomers = () => {
   }
 
   return (
-    <>
+    <div className='containerFormMap'>
       <motion.div
+        className='containerForm'
         initial={{ opacity: 0, x: +200 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
@@ -115,13 +116,14 @@ const RouteCustomers = () => {
       </motion.div>
 
       <motion.div
+      className='containerMap'
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
-        <div id='map' style={{ height: '400px', width: '1000px', margin: '0 auto', marginBottom: '100px' }}></div>
+        <div id='map'></div>
       </motion.div>
-    </>
+    </div>
   );
 }
 

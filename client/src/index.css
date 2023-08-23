@@ -73,11 +73,32 @@ a {
   font-weight: 300;
 }
 
+.containerFormMap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+}
+
+.containerForm {
+  flex: 1
+}
+
+.containerMap {
+  flex: 1
+}
+
+#map {
+  width: 80%;
+  height: 300px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
 .cont {
   background-color: #3B3B3B;
   width: 80%;
   border-radius: 20px;
-  margin: 100px auto 100px auto;
+  margin: 100px auto 25px auto;
   padding: 25px 0px 25px 0px;
 }
 
