@@ -28,7 +28,7 @@ const RouteCustomers = () => {
 
     async function loadMap(customers) {
       const loader = new Loader({
-        apiKey: 'AIzaSyBeJfZ2ZER7bSNvcak4JXO8jbYaWqbHMQs',
+        apiKey: process.env.REACT_APP_GM_KEY,
         version: "weekly"
       });
 
