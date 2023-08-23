@@ -60,8 +60,10 @@ const RouteCustomers = () => {
                   ${customer.email}
                   <br/>
                   ${customer.postCode}
+                  <a href='/customer/${customer._id}'>View Details</a>
                 </div>
               `);
+
               window.infowindow.open(window.myMap, this);
             });
           }
@@ -92,6 +94,7 @@ const RouteCustomers = () => {
               ${customer.postCode}
             </div>
           `);
+
           window.infowindow.open(window.myMap, this);
         });
       }
