@@ -3,6 +3,7 @@ name: AWS Deploy
 # run job when event triggered when pushes done to the main branch, only in 'server' folder.
 # for pull requests merged into main, 'pull_request' must be used.
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
