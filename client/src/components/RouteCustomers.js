@@ -57,12 +57,9 @@ const RouteCustomers = () => {
             window.google.maps.event.addListener(marker, 'click', function () {
               window.infowindow.setContent(`
                 <div style='color:black;'>
-                  <strong>${customer.name}</strong>
-                  <br/>
-                  ${customer.email}
-                  <br/>
-                  ${customer.postcode}
-                  <br/>
+                  <h3>${customer.name}</h3>
+                  <p style='margin-top:4px;'>${customer.email}</p>
+                  <p style='margin-top:4px;'>${customer.postcode}</p>
                   <button class='btn btn-map' id='btn-map'>View Details</button>
                 </div>
               `);
@@ -98,12 +95,9 @@ const RouteCustomers = () => {
         window.google.maps.event.addListener(marker, 'click', function () {
           window.infowindow.setContent(`
             <div style='color:black;'>
-              <strong>${customer.name}</strong>
-              <br/>
-              ${customer.email}
-              <br/>
-              ${customer.postcode}
-              <br/>
+              <h3>${customer.name}</h3>
+              <p style='margin-top:4px;'>${customer.email}</p>
+              <p style='margin-top:4px;'>${customer.postcode}</p>
               <button class='btn btn-map' id='btn-map'>View Details</button>
             </div>
           `);
@@ -142,7 +136,6 @@ const RouteCustomers = () => {
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
         <div id='map'></div>
-        <div style={{ backgroundColor: 'black', width: '20px', height: '20px' }}></div>
       </motion.div>
       
     </div>
