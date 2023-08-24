@@ -88,6 +88,12 @@ a {
   margin-bottom: 100px;
 }
 
+.containerForm, .containerMap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .containerForm {
   flex: 1
 }
@@ -232,13 +238,7 @@ textarea {
     flex-direction: row;
     margin-top: 50px;
   }
-
-  .containerForm, .containerMap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
+  
   .panel {
     width: 80%;
     margin: 0px;
@@ -251,7 +251,16 @@ textarea {
   }
 
   .panel {
-    width: 60%;
+    width: 350px;
+  }
+
+  #map {
+    width: 475px;
+  }
+
+  .containerFormMap {
+    width: fit-content;
+    margin: 100px auto 100px auto;
   }
 
   .containerForm {
@@ -279,6 +288,10 @@ textarea {
   }
 
   .panel {
-    width: 55%;
+    width: 350px;
+  }
+
+  #map {
+    width: 500px;
   }
 }
