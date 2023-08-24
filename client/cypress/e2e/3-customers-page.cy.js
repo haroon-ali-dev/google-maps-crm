@@ -74,7 +74,10 @@ describe('Creating customers', () => {
   it('Creates a customer', () => {
     cy.get('#name').type('Samantha Bishop');
     cy.get('#email').type('samantha@gmail.com');
+    cy.get('#postcode').type('M16 0EF');
     cy.get('#btn-add').click();
+    cy.wait(1000);
+    cy.get('body').click(700, 410);
     cy.contains('samantha@gmail.com').should('exist');
   })
 })

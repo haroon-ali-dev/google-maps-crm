@@ -18,7 +18,7 @@ const customerSchema = new mongoose.Schema({
     minLength: 3,
     maxLength: 256
   },
-  postCode: {
+  postcode: {
     type: String,
     required: true,
     minLength: 3,
@@ -33,7 +33,7 @@ function validate(customer) {
     userId: Joi.string().required(),
     name: Joi.string().min(3).max(50).required(),
     email: Joi.string().min(3).max(256).required(),
-    postCode: Joi.string().min(3).max(10).required()
+    postcode: Joi.string().min(3).max(10).required()
   });
 
   return schema.validate(customer);

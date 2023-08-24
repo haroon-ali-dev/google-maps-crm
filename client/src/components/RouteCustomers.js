@@ -1,5 +1,6 @@
 import { AppContext } from "../App";
 import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import jwt from "jwt-decode";
 import { motion } from "framer-motion";
 import { Loader } from '@googlemaps/js-api-loader';
@@ -7,6 +8,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import CreateCustomer from "./CreateCustomer";
 
 const RouteCustomers = () => {
+  const navigate = useNavigate();
   const apiURL = useContext(AppContext);
 
   const token = localStorage.getItem("token");
@@ -28,7 +30,7 @@ const RouteCustomers = () => {
 
     async function loadMap(customers) {
       const loader = new Loader({
-        apiKey: 'AIzaSyBeJfZ2ZER7bSNvcak4JXO8jbYaWqbHMQs',
+        apiKey: process.env.REACT_APP_GM_KEY,
         version: "weekly"
       });
 
@@ -42,8 +44,8 @@ const RouteCustomers = () => {
         zoom: 10
       });
 
-      for (let customer of customers) {
-        window.geocoder.geocode({ 'address': customer.postCode }, function (results, status) {
+      customers.forEach((customer, index) => {
+        window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
           if (status === 'OK') {
             window.myMap.setCenter(results[0].geometry.location);
 
@@ -55,25 +57,33 @@ const RouteCustomers = () => {
             window.google.maps.event.addListener(marker, 'click', function () {
               window.infowindow.setContent(`
                 <div style='color:black;'>
-                  <strong>${customer.name}</strong>
-                  <br/>
-                  ${customer.email}
-                  <br/>
-                  ${customer.postCode}
+                  <h3>${customer.name}</h3>
+                  <p style='margin-top:4px;'>${customer.email}</p>
+                  <p style='margin-top:4px;'>${customer.postcode}</p>
+                  <button class='btn btn-map' id='btn-map'>View Details</button>
                 </div>
               `);
+
               window.infowindow.open(window.myMap, this);
+
+              window.infowindow.addListener('domready', () => {
+                const btnMap = document.getElementById('btn-map');
+
+                btnMap.addEventListener('click', () => {
+                  navigate(`/customer/${customer._id}`);
+                });
+              });
             });
           }
         });
-      }
+      });
     }
 
     getCustomers();
-  }, [apiURL, token, uId]);
+  }, [apiURL, token, uId, navigate]);
 
   const createCustomer = (customer) => {
-    window.geocoder.geocode({ 'address': customer.postCode }, function (results, status) {
+    window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
       if (status === 'OK') {
         window.myMap.setCenter(results[0].geometry.location);
 
@@ -85,39 +95,50 @@ const RouteCustomers = () => {
         window.google.maps.event.addListener(marker, 'click', function () {
           window.infowindow.setContent(`
             <div style='color:black;'>
-              <strong>${customer.name}</strong>
-              <br/>
-              ${customer.email}
-              <br/>
-              ${customer.postCode}
+              <h3>${customer.name}</h3>
+              <p style='margin-top:4px;'>${customer.email}</p>
+              <p style='margin-top:4px;'>${customer.postcode}</p>
+              <button class='btn btn-map' id='btn-map'>View Details</button>
             </div>
           `);
+
           window.infowindow.open(window.myMap, this);
+
+          window.infowindow.addListener('domready', () => {
+            const btnMap = document.getElementById('btn-map');
+
+            btnMap.addEventListener('click', () => {
+              navigate(`/customer/${customer._id}`);
+            });
+          });
         });
       }
     });
   }
 
   return (
-    <>
+    <div className='containerFormMap'>
       <motion.div
+        className='containerForm'
         initial={{ opacity: 0, x: +200 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
-        <div className="cont">
+        <div className="cont panel">
           <CreateCustomer createCustomer={createCustomer} />
         </div>
       </motion.div>
 
       <motion.div
+        className='containerMap'
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
-        <div id='map' style={{ height: '400px', width: '1000px', margin: '0 auto', marginBottom: '100px' }}></div>
+        <div id='map'></div>
       </motion.div>
-    </>
+      
+    </div>
   );
 }
 

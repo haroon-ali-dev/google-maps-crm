@@ -17,7 +17,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -43,6 +43,15 @@ code {
   color: black;
 }
 
+.btn-map {
+  background-color: #0089AC;
+  padding: 0px;
+  color: white;
+  font-size: 10px;
+  margin-top: 5px;
+  padding: 7px 10px 7px 10px;
+}
+
 a {
   text-decoration: none;
   width: 100px;
@@ -63,7 +72,7 @@ a {
 }
 
 .btn-nav:hover {
-  background-color:#E2412E;
+  background-color: #E2412E;
   color: white;
 }
 
@@ -73,11 +82,37 @@ a {
   font-weight: 300;
 }
 
+.containerFormMap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+}
+
+.containerForm, .containerMap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerForm {
+  flex: 1
+}
+
+.containerMap {
+  flex: 1
+}
+
+#map {
+  width: 80%;
+  height: 300px;
+  border-radius: 20px;
+}
+
 .cont {
   background-color: #3B3B3B;
   width: 80%;
   border-radius: 20px;
-  margin: 100px auto 100px auto;
+  margin: 100px auto 25px auto;
   padding: 25px 0px 25px 0px;
 }
 
@@ -198,9 +233,44 @@ textarea {
   }
 }
 
+@media (min-width: 768px) {
+  .containerFormMap {
+    flex-direction: row;
+    margin-top: 50px;
+  }
+  
+  .panel {
+    width: 80%;
+    margin: 0px;
+  }
+}
+
 @media (min-width: 992px) {
   .cont {
     width: 30%;
+  }
+
+  .panel {
+    width: 350px;
+  }
+
+  #map {
+    width: 475px;
+  }
+
+  .containerFormMap {
+    width: fit-content;
+    margin: 100px auto 100px auto;
+  }
+
+  .containerForm {
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
+
+  .containerMap {
+    justify-content: flex-start;
+    margin-left: 20px;
   }
 
   .cont-cust-page {
@@ -215,5 +285,13 @@ textarea {
 
   .cont {
     width: 25%;
+  }
+
+  .panel {
+    width: 350px;
+  }
+
+  #map {
+    width: 500px;
   }
 }

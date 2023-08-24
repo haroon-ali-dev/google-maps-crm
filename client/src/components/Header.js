@@ -21,7 +21,7 @@ const Header = () => {
         }
         {token && <button className="btn btn-nav" onClick={logout}>Logout</button>}
       </nav>
-      <h1 className="heading">Simple Customer Relationship Manager</h1>
+      <h1 className="heading">Google Maps CRM</h1>
     </header>
   );
 }

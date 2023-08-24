@@ -11,7 +11,7 @@ import Notification from "./Notification";
 const schema = yup.object({
   name: yup.string().min(3).max(300).required().label("Name"),
   email: yup.string().max(256).email().required().label("Email"),
-  postCode: yup.string().min(3).max(10).required().label("Post Code"),
+  postcode: yup.string().min(3).max(10).matches(/^M.*/, 'Postcode must start with the character M').required().label("Postcode"),
 }).required();
 
 const CreateCustomer = ({ createCustomer }) => {
@@ -36,41 +36,60 @@ const CreateCustomer = ({ createCustomer }) => {
   const { uId } = jwt(token);
 
   const onSubmit = async (formData) => {
-    try {
-      const res = await fetch(`${apiURL}/api/customers`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ userId: uId, ...formData })
-      });
-
-      const data = await res.json();
-
-      if (res.status === 200) {
-        createCustomer(data.customer);
-        setValue("name", "");
-        setValue("email", "");
-      } else {
+    window.geocoder.geocode({ 'address': formData.postcode }, async function (results, status) {
+      if (status !== 'OK') {
         setNotification({
-          message: data.message,
+          message: 'Postcode is not valid',
           display: true,
           bgColor: "#E2412E"
         });
+
+        setTimeout(() => {
+          setNotification({
+            message: "",
+            display: false,
+            bgColor: "#E2412E"
+          });
+        }, 3000);
+      } else {
+        try {
+          const res = await fetch(`${apiURL}/api/customers`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "x-auth-token": token },
+            body: JSON.stringify({ userId: uId, ...formData })
+          });
+
+          const data = await res.json();
+
+          if (res.status === 200) {
+            createCustomer(data.customer);
+            setValue("name", "");
+            setValue("email", "");
+            setValue("postcode", "");
+          } else {
+            setNotification({
+              message: data.message,
+              display: true,
+              bgColor: "#E2412E"
+            });
+          }
+        } catch (error) {
+          setNotification({
+            message: error.message,
+            display: true,
+            bgColor: "#E2412E"
+          });
+        } finally {
+          setTimeout(() => {
+            setNotification({
+              message: "",
+              display: false,
+              bgColor: "#E2412E"
+            });
+          }, 3000);
+        }
       }
-    } catch (error) {
-      setNotification({
-        message: error.message,
-        display: true,
-        bgColor: "#E2412E"
-      });
-    } finally {
-      setTimeout(() => {
-        setNotification({
-          message: "",
-          display: false,
-          bgColor: "#E2412E"
-        });
-      }, 3000);
-    }
+    });
   }
 
   return (
@@ -110,17 +129,17 @@ const CreateCustomer = ({ createCustomer }) => {
         </div>
         <div className="form-input-container">
           <label>
-            Post Code
+            Postcode
             <br />
             <input
-              id="postCode"
+              id="postcode"
               type="text"
-              {...register("postCode")}
+              {...register("postcode")}
             />
           </label>
-          {errors.postCode?.message && (
+          {errors.postcode?.message && (
             <div className='cont-invalid'>
-              <span className='invalid-text'>{errors.postCode?.message}</span>
+              <span className='invalid-text'>{errors.postcode?.message}</span>
             </div>
           )}
         </div>

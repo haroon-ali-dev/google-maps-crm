@@ -46,6 +46,7 @@ const RouteCustomerUpdate = () => {
       if (data.message === "success") {
         setValue("name", data.customer.name);
         setValue("email", data.customer.email);
+        window.cusPostcode = data.customer.postcode;
       } else {
         alert(data.message);
       }
@@ -59,7 +60,7 @@ const RouteCustomerUpdate = () => {
       const res = await fetch(`${apiURL}/api/customers/${cId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ userId: uId, ...formData })
+        body: JSON.stringify({ userId: uId, ...formData, postcode: window.cusPostcode })
       });
 
       const data = await res.json();
