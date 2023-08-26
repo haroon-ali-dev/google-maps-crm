@@ -1,4 +1,4 @@
-# Simple Customer Relationship Manager
+# Google Maps CRM
 A simple CRM that businesses can use to keep track of their customers and business-customer correspondence.
 
 ## Video
