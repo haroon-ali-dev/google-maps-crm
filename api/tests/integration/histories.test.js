@@ -42,30 +42,44 @@ describe('/api/histories', () => {
         expect(response.body.history).toHaveProperty('customerId');
     });
 
-    // it('should create a customer', async () => {
-    //     const customer = new db.Customer({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
-    //     await customer.save();
+    it('should get histories of a customer', async () => {
+        customer = new db.Customer({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
+        await customer.save();
 
-    //     const response = await request(baseUrl)
-    //         .get(`/api/customers/${customer._id}`)
-    //         .set('x-auth-token', token);
+        history = new db.History({ customerId: customer._id, date: '2022-03-09', info: 'Closed account.' });
+        await history.save();
 
-    //     expect(response.body.customer).toHaveProperty('name', 'Samantha Thomas');
-    // });
+        const response = await request(baseUrl)
+            .get(`/api/histories/customer/${customer._id}`)
+            .set('x-auth-token', token);
 
-    // it('should create a customer', async () => {
-    //     const customer = new db.Customer({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
-    //     await customer.save();
+        expect(response.body.histories[0]).toHaveProperty('info', 'Closed account.');
+    });
 
-    //     let response = await request(baseUrl)
-    //         .put(`/api/customers/${customer._id}`)
-    //         .set('x-auth-token', token)
-    //         .send({ name: 'Bob Builder', email: 'bob@gmail.com' });
+    it('should create a history', async () => {
+        customer = new db.Customer({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
+        await customer.save();
 
-    //     response = await request(baseUrl)
-    //         .get(`/api/customers/${customer._id}`)
-    //         .set('x-auth-token', token);
+        const response = await request(baseUrl)
+            .post(`/api/histories/${customer._id}`)
+            .set('x-auth-token', token)
+            .send({ customerId: customer._id, date: '2022-09-08', info: 'Opened a new account.' });
 
-    //     expect(response.status).toBe(200);
-    // });
+        expect(response.body.history).toHaveProperty('info', 'Opened a new account.');
+    });
+
+    it('should update a history', async () => {
+        customer = new db.Customer({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
+        await customer.save();
+
+        history = new db.History({ customerId: customer._id, date: '2022-03-09', info: 'Closed account.' });
+        await history.save();
+
+        let response = await request(baseUrl)
+            .put(`/api/histories/${history._id}`)
+            .set('x-auth-token', token)
+            .send({ date: '2022-03-09', info: 'Created another account again.' });
+
+        expect(response.status).toBe(200);
+    });
 });

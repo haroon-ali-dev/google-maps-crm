@@ -40,28 +40,22 @@ describe('/api/customers', () => {
     });
 
     it('should create a customer', async () => {
-        const customer = new db.Customer({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
-        await customer.save();
-
         const response = await request(baseUrl)
-            .get(`/api/customers/${customer._id}`)
-            .set('x-auth-token', token);
+            .post(`/api/customers`)
+            .set('x-auth-token', token)
+            .send({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
 
         expect(response.body.customer).toHaveProperty('name', 'Samantha Thomas');
     });
 
-    it('should create a customer', async () => {
+    it('should update a customer', async () => {
         const customer = new db.Customer({ userId, name: 'Samantha Thomas', email: 'samantha@gmail.com', postcode: 'M16 0EF' });
         await customer.save();
 
         let response = await request(baseUrl)
             .put(`/api/customers/${customer._id}`)
             .set('x-auth-token', token)
-            .send({ name: 'Bob Builder', email: 'bob@gmail.com' });
-
-        response = await request(baseUrl)
-            .get(`/api/customers/${customer._id}`)
-            .set('x-auth-token', token);
+            .send({ userId, name: 'Bob Builder', email: 'bob@gmail.com', postcode: 'M16 0EF' });
 
         expect(response.status).toBe(200);
     });
