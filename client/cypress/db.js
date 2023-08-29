@@ -81,3 +81,4 @@ async function seed() {
 module.exports.seed = seed;
 module.exports.mongoose = mongoose;
 module.exports.Customer = Customer;
+module.exports.History = History;
