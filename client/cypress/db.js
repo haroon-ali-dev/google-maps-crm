@@ -65,8 +65,6 @@ const historySchema = new mongoose.Schema({
 const History = mongoose.model("History", historySchema);
 
 async function seed() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/crm");
-
     await User.deleteMany({ email: { $ne: "haroon@gmail.com" } });
     await Customer.deleteMany({});
     await History.deleteMany({});
@@ -81,3 +79,6 @@ async function seed() {
 }
 
 module.exports.seed = seed;
+module.exports.mongoose = mongoose;
+module.exports.Customer = Customer;
+module.exports.History = History;

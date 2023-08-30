@@ -3,7 +3,7 @@ const db = require('../../../client/cypress/db');
 
 const baseUrl = 'http://localhost:3001';
 
-describe('/api/register', () => {
+describe('/api/login', () => {
     beforeAll(async () => {
         await db.mongoose.connect("mongodb://127.0.0.1:27017/crm");
     });
@@ -18,26 +18,27 @@ describe('/api/register', () => {
 
     it('should respond with 400 if password is missing', async () => {
         const response = await request(baseUrl)
-            .post('/api/register')
+            .post('/api/login')
             .send({ email: 'haroon@gmail.com' });
 
         expect(response.status).toBe(400);
     });
 
-    it('should respond with 400 if user already exists', async () => {
+    it('should respond with 400 if wrong login details', async () => {
         const response = await request(baseUrl)
-            .post('/api/register')
-            .send({ email: 'haroon@gmail.com', password: 'password321' });
+            .post('/api/login')
+            .send({ email: 'haroon@gmail.com', password: 'password3211' });
 
         expect(response.status).toBe(400);
-        expect(response.body).toHaveProperty('message', 'User already registered.');
+        expect(response.body).toHaveProperty('message', 'Invalid email or password.');
     });
 
-    it('should save the user', async () => {
+    it('should respond with 200 with token', async () => {
         const response = await request(baseUrl)
-            .post('/api/register')
-            .send({ email: 'haroon2@gmail.com', password: 'password321' });
+            .post('/api/login')
+            .send({ email: 'haroon@gmail.com', password: 'password321' });
 
         expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty('token');
     });
 });
