@@ -9,7 +9,8 @@ let userId = '64ee405af0732ea131533f38';
 describe('/api/histories', () => {
     beforeAll(async () => {
         await db.mongoose.connect("mongodb://127.0.0.1:27017/crm");
-        token = await util.getToken();
+        const getToken = await util.getToken('haroon@gmail.com', 'password321');
+        token = getToken.body.token;
     });
 
     beforeEach(async () => {
