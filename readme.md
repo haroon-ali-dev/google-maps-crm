@@ -12,6 +12,7 @@ https://res.cloudinary.com/dembzfkgg/video/upload/v1687179064/CRM_bac821e46f
 HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions.
 
 ## Automated Tests
+- Integration tests with Jest and Supertest.
 - End-to-End tests with Cypress.
 
 ## Features
