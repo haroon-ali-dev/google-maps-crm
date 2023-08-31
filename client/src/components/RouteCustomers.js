@@ -39,8 +39,8 @@ const RouteCustomers = () => {
 
       await loader.importLibrary('core');
 
-      window.geocoder = new window.google.maps.Geocoder();
-      window.infowindow = new window.google.maps.InfoWindow();
+      mapRef.current.geocoder = new window.google.maps.Geocoder();
+      mapRef.current.infowindow = new window.google.maps.InfoWindow();
 
       mapRef.current.map = new window.google.maps.Map(mapElementRef.current, {
         center: { lat: 53.4733352, lng: -2.2600077 },
@@ -48,7 +48,7 @@ const RouteCustomers = () => {
       });
 
       customers.forEach((customer, index) => {
-        window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
+        mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
           if (status === 'OK') {
             mapRef.current.map.setCenter(results[0].geometry.location);
 
@@ -58,7 +58,7 @@ const RouteCustomers = () => {
             });
 
             window.google.maps.event.addListener(marker, 'click', function () {
-              window.infowindow.setContent(`
+              mapRef.current.infowindow.setContent(`
                 <div style='color:black;'>
                   <h3>${customer.name}</h3>
                   <p style='margin-top:4px;'>${customer.email}</p>
@@ -67,9 +67,9 @@ const RouteCustomers = () => {
                 </div>
               `);
 
-              window.infowindow.open(mapRef.current.map, this);
+              mapRef.current.infowindow.open(mapRef.current.map, this);
 
-              window.infowindow.addListener('domready', () => {
+              mapRef.current.infowindow.addListener('domready', () => {
                 const btnMap = document.getElementById('btn-map');
 
                 btnMap.addEventListener('click', () => {
@@ -86,7 +86,7 @@ const RouteCustomers = () => {
   }, [apiURL, token, uId, navigate]);
 
   const createCustomer = (customer) => {
-    window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
+    mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
       if (status === 'OK') {
         mapRef.current.map.setCenter(results[0].geometry.location);
 
@@ -96,7 +96,7 @@ const RouteCustomers = () => {
         });
 
         window.google.maps.event.addListener(marker, 'click', function () {
-          window.infowindow.setContent(`
+          mapRef.current.infowindow.setContent(`
             <div style='color:black;'>
               <h3>${customer.name}</h3>
               <p style='margin-top:4px;'>${customer.email}</p>
@@ -105,9 +105,9 @@ const RouteCustomers = () => {
             </div>
           `);
 
-          window.infowindow.open(mapRef.current.map, this);
+          mapRef.current.infowindow.open(mapRef.current.map, this);
 
-          window.infowindow.addListener('domready', () => {
+          mapRef.current.infowindow.addListener('domready', () => {
             const btnMap = document.getElementById('btn-map');
 
             btnMap.addEventListener('click', () => {
