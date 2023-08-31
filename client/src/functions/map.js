@@ -18,40 +18,16 @@ export async function loadMap(mapRef, mapElementRef) {
 }
 
 export async function showCustomers(mapRef, customers, navigate) {
-    customers.forEach((customer, index) => {
-        mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
-            if (status === 'OK') {
-                const marker = new window.google.maps.Marker({
-                    map: mapRef.current.map,
-                    position: results[0].geometry.location
-                });
-
-                window.google.maps.event.addListener(marker, 'click', function () {
-                    mapRef.current.infowindow.setContent(`
-                <div style='color:black;'>
-                  <h3>${customer.name}</h3>
-                  <p style='margin-top:4px;'>${customer.email}</p>
-                  <p style='margin-top:4px;'>${customer.postcode}</p>
-                  <button class='btn btn-map' id='btn-map'>View Details</button>
-                </div>
-              `);
-
-                    mapRef.current.infowindow.open(mapRef.current.map, this);
-
-                    mapRef.current.infowindow.addListener('domready', () => {
-                        const btnMap = document.getElementById('btn-map');
-
-                        btnMap.addEventListener('click', () => {
-                            navigate(`/customer/${customer._id}`);
-                        });
-                    });
-                });
-            }
-        });
-    });
+    for (let customer of customers) {
+        displayCustomer(mapRef, customer, navigate);
+    }
 }
 
 export async function showCustomer(mapRef, customer, navigate) {
+    displayCustomer(mapRef, customer, navigate);
+}
+
+function displayCustomer(mapRef, customer, navigate) {
     mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
         if (status === 'OK') {
             const marker = new window.google.maps.Marker({
@@ -61,12 +37,12 @@ export async function showCustomer(mapRef, customer, navigate) {
 
             window.google.maps.event.addListener(marker, 'click', function () {
                 mapRef.current.infowindow.setContent(`
-              <div style='color:black;'>
-                <h3>${customer.name}</h3>
-                <p style='margin-top:4px;'>${customer.email}</p>
-                <p style='margin-top:4px;'>${customer.postcode}</p>
-                <button class='btn btn-map' id='btn-map'>View Details</button>
-              </div>
+                <div style='color:black;'>
+                    <h3>${customer.name}</h3>
+                    <p style='margin-top:4px;'>${customer.email}</p>
+                    <p style='margin-top:4px;'>${customer.postcode}</p>
+                    <button class='btn btn-map' id='btn-map'>View Details</button>
+                </div>
             `);
 
                 mapRef.current.infowindow.open(mapRef.current.map, this);
