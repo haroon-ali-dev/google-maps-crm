@@ -138,7 +138,7 @@ const RouteCustomers = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
-        <div id='map' ref={mapElementRef}></div>
+        <div className='map' ref={mapElementRef}></div>
       </motion.div>
       
     </div>
