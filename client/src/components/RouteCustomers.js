@@ -1,5 +1,5 @@
 import { AppContext } from "../App";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt from "jwt-decode";
 import { motion } from "framer-motion";
@@ -13,6 +13,9 @@ const RouteCustomers = () => {
 
   const token = localStorage.getItem("token");
   const { uId } = jwt(token);
+
+  const mapRef = useRef({});
+  const mapElementRef = useRef(null);
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -39,7 +42,7 @@ const RouteCustomers = () => {
       window.geocoder = new window.google.maps.Geocoder();
       window.infowindow = new window.google.maps.InfoWindow();
 
-      window.myMap = new window.google.maps.Map(document.getElementById('map'), {
+      mapRef.current.map = new window.google.maps.Map(mapElementRef.current, {
         center: { lat: 53.4733352, lng: -2.2600077 },
         zoom: 10
       });
@@ -47,10 +50,10 @@ const RouteCustomers = () => {
       customers.forEach((customer, index) => {
         window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
           if (status === 'OK') {
-            window.myMap.setCenter(results[0].geometry.location);
+            mapRef.current.map.setCenter(results[0].geometry.location);
 
             const marker = new window.google.maps.Marker({
-              map: window.myMap,
+              map: mapRef.current.map,
               position: results[0].geometry.location
             });
 
@@ -64,7 +67,7 @@ const RouteCustomers = () => {
                 </div>
               `);
 
-              window.infowindow.open(window.myMap, this);
+              window.infowindow.open(mapRef.current.map, this);
 
               window.infowindow.addListener('domready', () => {
                 const btnMap = document.getElementById('btn-map');
@@ -85,10 +88,10 @@ const RouteCustomers = () => {
   const createCustomer = (customer) => {
     window.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
       if (status === 'OK') {
-        window.myMap.setCenter(results[0].geometry.location);
+        mapRef.current.map.setCenter(results[0].geometry.location);
 
         const marker = new window.google.maps.Marker({
-          map: window.myMap,
+          map: mapRef.current.map,
           position: results[0].geometry.location
         });
 
@@ -102,7 +105,7 @@ const RouteCustomers = () => {
             </div>
           `);
 
-          window.infowindow.open(window.myMap, this);
+          window.infowindow.open(mapRef.current.map, this);
 
           window.infowindow.addListener('domready', () => {
             const btnMap = document.getElementById('btn-map');
@@ -135,7 +138,7 @@ const RouteCustomers = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
-        <div id='map'></div>
+        <div id='map' ref={mapElementRef}></div>
       </motion.div>
       
     </div>
