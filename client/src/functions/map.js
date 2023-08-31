@@ -37,22 +37,30 @@ function displayCustomer(mapRef, customer, navigate) {
 
             window.google.maps.event.addListener(marker, 'click', function () {
                 mapRef.current.infowindow.setContent(`
-                <div style='color:black;'>
-                    <h3>${customer.name}</h3>
-                    <p style='margin-top:4px;'>${customer.email}</p>
-                    <p style='margin-top:4px;'>${customer.postcode}</p>
-                    <button class='btn btn-map' id='btn-map'>View Details</button>
-                </div>
-            `);
+                    <div style='color:black;' id='containerInfoWindow'>
+                        <h3>${customer.name}</h3>
+                        <p style='margin-top:4px;'>${customer.email}</p>
+                        <p style='margin-top:4px;'>${customer.postcode}</p>
+                        <button class='btn btn-map' id='btn-map'>View Details</button>
+                    </div>
+                `);
 
                 mapRef.current.infowindow.open(mapRef.current.map, this);
 
                 mapRef.current.infowindow.addListener('domready', () => {
-                    const btnMap = document.getElementById('btn-map');
+                    const containerInfoWindow = document.getElementById('containerInfoWindow');
+                    let btnMap = document.getElementById('btn-map');
+                    containerInfoWindow.removeChild(btnMap);
 
-                    btnMap.addEventListener('click', () => {
+                    let button = document.createElement('button');
+                    button.setAttribute('id', 'btn-map');
+                    button.setAttribute('class', 'btn btn-map');
+                    const btnText = document.createTextNode('View Details');
+                    button.append(btnText);
+                    button.addEventListener('click', () => {
                         navigate(`/customer/${customer._id}`);
                     });
+                    containerInfoWindow.appendChild(button);
                 });
             });
         }
