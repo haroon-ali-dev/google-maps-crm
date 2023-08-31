@@ -1,10 +1,13 @@
 import { AppContext } from "../App";
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import jwt from "jwt-decode";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import { showCustomer } from "../functions/map";
 
 import Notification from "./Notification";
 
@@ -14,7 +17,8 @@ const schema = yup.object({
   postcode: yup.string().min(3).max(10).matches(/^M.*/, 'Postcode must start with the character M').required().label("Postcode"),
 }).required();
 
-const CreateCustomer = ({ createCustomer }) => {
+const CreateCustomer = ({ mapRef }) => {
+  const navigate = useNavigate();
   const apiURL = useContext(AppContext);
 
   const [notification, setNotification] = useState({
@@ -36,7 +40,7 @@ const CreateCustomer = ({ createCustomer }) => {
   const { uId } = jwt(token);
 
   const onSubmit = async (formData) => {
-    window.geocoder.geocode({ 'address': formData.postcode }, async function (results, status) {
+    mapRef.current.geocoder.geocode({ 'address': formData.postcode }, async function (results, status) {
       if (status !== 'OK') {
         setNotification({
           message: 'Postcode is not valid',
@@ -62,7 +66,7 @@ const CreateCustomer = ({ createCustomer }) => {
           const data = await res.json();
 
           if (res.status === 200) {
-            createCustomer(data.customer);
+            showCustomer(mapRef, data.customer, navigate);
             setValue("name", "");
             setValue("email", "");
             setValue("postcode", "");
