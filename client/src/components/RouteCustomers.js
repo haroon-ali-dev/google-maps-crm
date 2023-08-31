@@ -5,6 +5,8 @@ import jwt from "jwt-decode";
 import { motion } from "framer-motion";
 import { Loader } from '@googlemaps/js-api-loader';
 
+import { getCustomers } from "../hooks/customers";
+
 import CreateCustomer from "./CreateCustomer";
 
 const RouteCustomers = () => {
@@ -18,69 +20,63 @@ const RouteCustomers = () => {
   const mapElementRef = useRef(null);
 
   useEffect(() => {
-    const getCustomers = async () => {
-      const res = await fetch(`${apiURL}/api/customers/user/${uId}`, {
-        headers: { "x-auth-token": token }
-      });
-      const data = await res.json();
+    async function init() {
+      const customers = await getCustomers(apiURL, uId, token);
+      loadMap(customers);
 
-      if (data.message === "success") {
-        loadMap(data.customers);
-      } else {
-        alert(data.message);
-      }
-    }
-
-    async function loadMap(customers) {
-      const loader = new Loader({
-        apiKey: process.env.REACT_APP_GM_KEY,
-        version: "weekly"
-      });
-
-      await loader.importLibrary('core');
-
-      mapRef.current.geocoder = new window.google.maps.Geocoder();
-      mapRef.current.infowindow = new window.google.maps.InfoWindow();
-
-      mapRef.current.map = new window.google.maps.Map(mapElementRef.current, {
-        center: { lat: 53.4733352, lng: -2.2600077 },
-        zoom: 10
-      });
-
-      customers.forEach((customer, index) => {
-        mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
-          if (status === 'OK') {
-            const marker = new window.google.maps.Marker({
-              map: mapRef.current.map,
-              position: results[0].geometry.location
-            });
-
-            window.google.maps.event.addListener(marker, 'click', function () {
-              mapRef.current.infowindow.setContent(`
-                <div style='color:black;'>
-                  <h3>${customer.name}</h3>
-                  <p style='margin-top:4px;'>${customer.email}</p>
-                  <p style='margin-top:4px;'>${customer.postcode}</p>
-                  <button class='btn btn-map' id='btn-map'>View Details</button>
-                </div>
-              `);
-
-              mapRef.current.infowindow.open(mapRef.current.map, this);
-
-              mapRef.current.infowindow.addListener('domready', () => {
-                const btnMap = document.getElementById('btn-map');
-
-                btnMap.addEventListener('click', () => {
-                  navigate(`/customer/${customer._id}`);
+      async function loadMap(customers) {
+        const loader = new Loader({
+          apiKey: process.env.REACT_APP_GM_KEY,
+          version: "weekly"
+        });
+  
+        await loader.importLibrary('core');
+  
+        mapRef.current.geocoder = new window.google.maps.Geocoder();
+        mapRef.current.infowindow = new window.google.maps.InfoWindow();
+  
+        mapRef.current.map = new window.google.maps.Map(mapElementRef.current, {
+          center: { lat: 53.4733352, lng: -2.2600077 },
+          zoom: 10
+        });
+  
+        customers.forEach((customer, index) => {
+          mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
+            if (status === 'OK') {
+              const marker = new window.google.maps.Marker({
+                map: mapRef.current.map,
+                position: results[0].geometry.location
+              });
+  
+              window.google.maps.event.addListener(marker, 'click', function () {
+                mapRef.current.infowindow.setContent(`
+                  <div style='color:black;'>
+                    <h3>${customer.name}</h3>
+                    <p style='margin-top:4px;'>${customer.email}</p>
+                    <p style='margin-top:4px;'>${customer.postcode}</p>
+                    <button class='btn btn-map' id='btn-map'>View Details</button>
+                  </div>
+                `);
+  
+                mapRef.current.infowindow.open(mapRef.current.map, this);
+  
+                mapRef.current.infowindow.addListener('domready', () => {
+                  const btnMap = document.getElementById('btn-map');
+  
+                  btnMap.addEventListener('click', () => {
+                    navigate(`/customer/${customer._id}`);
+                  });
                 });
               });
-            });
-          }
+            }
+          });
         });
-      });
+      }
+      
     }
 
-    getCustomers();
+
+    init();
   }, [apiURL, token, uId, navigate]);
 
   const createCustomer = (customer) => {
@@ -136,7 +132,6 @@ const RouteCustomers = () => {
       >
         <div className='map' ref={mapElementRef}></div>
       </motion.div>
-      
     </div>
   );
 }
