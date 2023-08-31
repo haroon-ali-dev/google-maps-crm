@@ -14,7 +14,7 @@ const schema = yup.object({
   postcode: yup.string().min(3).max(10).matches(/^M.*/, 'Postcode must start with the character M').required().label("Postcode"),
 }).required();
 
-const CreateCustomer = ({ createCustomer }) => {
+const CreateCustomer = ({ createCustomer, mapRef }) => {
   const apiURL = useContext(AppContext);
 
   const [notification, setNotification] = useState({
@@ -36,7 +36,7 @@ const CreateCustomer = ({ createCustomer }) => {
   const { uId } = jwt(token);
 
   const onSubmit = async (formData) => {
-    window.geocoder.geocode({ 'address': formData.postcode }, async function (results, status) {
+    mapRef.current.geocoder.geocode({ 'address': formData.postcode }, async function (results, status) {
       if (status !== 'OK') {
         setNotification({
           message: 'Postcode is not valid',

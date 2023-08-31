@@ -50,8 +50,6 @@ const RouteCustomers = () => {
       customers.forEach((customer, index) => {
         mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
           if (status === 'OK') {
-            mapRef.current.map.setCenter(results[0].geometry.location);
-
             const marker = new window.google.maps.Marker({
               map: mapRef.current.map,
               position: results[0].geometry.location
@@ -88,8 +86,6 @@ const RouteCustomers = () => {
   const createCustomer = (customer) => {
     mapRef.current.geocoder.geocode({ 'address': customer.postcode }, function (results, status) {
       if (status === 'OK') {
-        mapRef.current.map.setCenter(results[0].geometry.location);
-
         const marker = new window.google.maps.Marker({
           map: mapRef.current.map,
           position: results[0].geometry.location
@@ -128,7 +124,7 @@ const RouteCustomers = () => {
         transition={{ ease: "easeOut", duration: 1.5 }}
       >
         <div className="cont panel">
-          <CreateCustomer createCustomer={createCustomer} />
+          <CreateCustomer createCustomer={createCustomer} mapRef={mapRef} />
         </div>
       </motion.div>
 
