@@ -24,8 +24,11 @@ With this application, businesses can effortlessly create customer profiles, vis
 - Node.js server deployed to AWS using AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront and GitHub Actions.
 - MongoDB database deployed to MongoDB Atlas.
 
-## Tech Stack
-HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions.
+## :hammer: Tech Stack
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,nodejs,mongodb,aws,githubactions)](https://skillicons.dev)
+
+## :wrench: Additional Tech
+React Hook Form, Yup, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, AWS RDS, GitHub Actions.
 
 ## Automated Tests
 - Unit tests with Jest.
