@@ -1,5 +1,5 @@
-# Google Maps CRM
-A simple CRM that businesses can use to keep track of their customers and business-customer correspondence.
+# :world_map: Google Maps CRM
+Experience effortless customer management and dynamic Google Maps visualization in a user-friendly application.
 
 ## Video
 https://res.cloudinary.com/dembzfkgg/video/upload/v1687179064/CRM_bac821e46f
