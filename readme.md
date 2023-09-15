@@ -28,26 +28,17 @@ With this application, businesses can effortlessly create customer profiles, vis
 [![My Skills](https://skillicons.dev/icons?i=html,css,js,react,nodejs,mongodb,jest,aws,githubactions)](https://skillicons.dev)
 
 ## :wrench: Additional Tech
-React Hook Form, Yup, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, AWS RDS, GitHub Actions.
+React Hook Form, Yup, Jest, Cypress, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, AWS RDS, GitHub Actions.
 
 ## :gear: Automated Tests
 - Unit tests with Jest.
 - Integration tests with Jest and Supertest.
 - End-to-End tests with Cypress.
 
-## Automated Tests
-
-
-## Features
-
-
-## Utilization
-
-
-## Deployment
+## :earth_americas: Deployment
 - React.js front end deployed to Netlify.
 - Node.js server deployed to AWS.
 - MongoDB database deployed to MongoDB Atlas.
 
-## Deployment Links
-- Deployed Front End: https://simple-crm-dev.netlify.app/
+### :earth_americas: Links
+- [Deployed Application](https://simple-crm-dev.netlify.app)
