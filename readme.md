@@ -41,4 +41,4 @@ React Hook Form, Yup, Jest, Cypress, AWS Elastic Beanstalk, AWS EC2, AWS Load Ba
 - MongoDB database deployed to MongoDB Atlas.
 
 ### :earth_americas: Links
-- [Deployed Application](https://simple-crm-dev.netlify.app)
+- [Deployed Application](https://google-maps-crm.netlify.app/)
