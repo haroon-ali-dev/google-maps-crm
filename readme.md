@@ -10,6 +10,13 @@ Without a CRM, valuable customer data might be scattered across spreadsheets and
 ## :heavy_check_mark: Solution
 With this application, businesses can effortlessly create customer profiles, visualize them on a map for strategic insights, and seamlessly modify customer details and their interaction history. This streamlined approach enhances data management and empowers businesses to foster more meaningful and profitable customer relationships.
 
+## :page_facing_up: Features
+- Register and login users.
+- Create customers for each user.
+- View customers on map.
+- View and edit customer information.
+- View and edit customer history (business correspondence).
+
 ## Tech Stack
 HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions.
 
@@ -19,10 +26,7 @@ HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC
 - End-to-End tests with Cypress.
 
 ## Features
-- Register and login users.
-- Create customers for each user.
-- View and edit customer information.
-- View and edit customer history (business correspondence).
+
 
 ## Utilization
 - Fully responsive.
