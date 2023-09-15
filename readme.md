@@ -1,12 +1,8 @@
 # :world_map: Google Maps CRM
 Experience effortless customer management and dynamic Google Maps visualization in a user-friendly application.
 
-## Video
-https://res.cloudinary.com/dembzfkgg/video/upload/v1687179064/CRM_bac821e46f
-![App Screenshot](https://res.cloudinary.com/dembzfkgg/video/upload/v1687179064/CRM_bac821e46f.mp4)
-
-## Screenshots
-![App Screenshot](https://res.cloudinary.com/dembzfkgg/image/upload/v1687179035/crm_screenshot_1ad3b248cd.png)
+## :computer: Demo
+https://github.com/haroon-ali-dev/google-maps-crm/assets/87202358/db6a581e-4e37-42a6-a9af-f66837cf2d6b
 
 ## Tech Stack
 HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions.
