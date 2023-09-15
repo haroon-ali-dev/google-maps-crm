@@ -25,7 +25,7 @@ With this application, businesses can effortlessly create customer profiles, vis
 - MongoDB database deployed to MongoDB Atlas.
 
 ## :hammer: Tech Stack
-[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,nodejs,mongodb,aws,githubactions)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,nodejs,mongodb,jest,aws,githubactions)](https://skillicons.dev)
 
 ## :wrench: Additional Tech
 React Hook Form, Yup, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, AWS RDS, GitHub Actions.
