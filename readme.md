@@ -17,6 +17,13 @@ With this application, businesses can effortlessly create customer profiles, vis
 - View and edit customer information.
 - View and edit customer history (business correspondence).
 
+## :bookmark_tabs: Utilization
+- Fully responsive.
+- Authentication with JWT.
+- Animations using Framer Motion.
+- Node.js server deployed to AWS using AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront and GitHub Actions.
+- MongoDB database deployed to MongoDB Atlas.
+
 ## Tech Stack
 HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, GitHub Actions.
 
@@ -29,11 +36,7 @@ HTML, CSS, JavaScript, React.js, Node.js, MongoDB, AWS Elastic Beanstalk, AWS EC
 
 
 ## Utilization
-- Fully responsive.
-- Authentication with JWT.
-- Animations using Framer Motion.
-- Node.js server deployed to AWS using AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront and GitHub Actions.
-- MongoDB database deployed to MongoDB Atlas.
+
 
 ## Deployment
 - React.js front end deployed to Netlify.
