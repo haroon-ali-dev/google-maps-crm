@@ -30,10 +30,13 @@ With this application, businesses can effortlessly create customer profiles, vis
 ## :wrench: Additional Tech
 React Hook Form, Yup, AWS Elastic Beanstalk, AWS EC2, AWS Load Balancer, AWS S3, AWS CloudFront, AWS RDS, GitHub Actions.
 
-## Automated Tests
+## :gear: Automated Tests
 - Unit tests with Jest.
 - Integration tests with Jest and Supertest.
 - End-to-End tests with Cypress.
+
+## Automated Tests
+
 
 ## Features
 
